@@ -2,7 +2,9 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "pages/school/school"
+    "pages/school/school",
+    "pages/zskg",
+    "pages/school_detail/school_detail"
   ],
   "window":{
     "backgroundTextStyle":"light",

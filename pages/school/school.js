@@ -90,6 +90,10 @@ Page({
         })
     },
     schClick: function (e) {
-        console.log(e)
+        var queryBean = JSON.stringify(e.currentTarget.id)
+        wx.navigateTo({
+            url: '/pages/school_detail/school_detail?sch_id=' + queryBean,
+        })
+        console.log('跳转到详情页')
     }
 });

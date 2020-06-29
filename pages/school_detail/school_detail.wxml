@@ -1,0 +1,24 @@
+<view class="container">
+
+
+    <view class="title">{{school.title}}</view>
+    <view class="meta-header">
+        <text class="author">{{school.author}}</text>
+    </view>
+    <view class="content">
+        <rich-text nodes="{{school.meta}}"></rich-text>
+    </view>
+    <view class="content">
+        <rich-text nodes="{{school.rank}}"></rich-text>
+    </view>
+    <view class="content">
+        <rich-text nodes="{{school.detail}}"></rich-text>
+    </view>
+    <view class="content">
+        <rich-text nodes="{{school.people}}"></rich-text>
+    </view>
+
+
+
+    <text class="info" wx:if="{{info}}">{{info}}</text>
+</view>

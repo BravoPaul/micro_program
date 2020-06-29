@@ -69,8 +69,46 @@
     <!--            </view>-->
     <!--        </form>-->
     <!--    </view>-->
+<!--    <block>-->
+<!--        <view class="wrapper">-->
+<!--            <view class="content-font" style="margin-top:57vw;">-->
+<!--                <view class="nav" style="padding-top:20rpx;">-->
+<!--                    <view bindtap="goDetail" data-type="findUniversity" hoverClass="btnHover" openType="navigate">-->
+<!--                        <view class="nav-li flex" style="flex-direction:row;">-->
+<!--                            <image src="http://youzy-appfile.cn-bj.ufileos.com/style1/1.png"></image>-->
+<!--                            <view class="oneFontColor twoFontSize lineHeight">找大学</view>-->
+<!--                        </view>-->
+<!--                    </view>-->
+<!--                    <view bindtap="goDetail" data-type="selectMajor" hoverClass="btnHover" openType="navigate">-->
+<!--                        <view class="nav-li flex" style="flex-direction:row;">-->
+<!--                            <image src="http://youzy-appfile.cn-bj.ufileos.com/style1/2.png"></image>-->
+<!--                            <view class="oneFontColor twoFontSize lineHeight">查专业</view>-->
+<!--                        </view>-->
+<!--                    </view>-->
+<!--                    <view bindtap="goDetail" data-type="career" hoverClass="btnHover">-->
+<!--                        <view class="nav-li flex" style="flex-direction:row;">-->
+<!--                            <image src="http://youzy-appfile.cn-bj.ufileos.com/style1/3.png"></image>-->
+<!--                            <view class="oneFontColor twoFontSize lineHeight">看职业</view>-->
+<!--                        </view>-->
+<!--                    </view>-->
+<!--                    <view bindtap="goDetail" data-type="advanceBatch" hoverClass="btnHover">-->
+<!--                        <view class="nav-li flex" style="flex-direction:row;">-->
+<!--                            <image src="http://youzy-appfile.cn-bj.ufileos.com/style1/4.png"></image>-->
+<!--                            <view class="oneFontColor twoFontSize lineHeight">提前批</view>-->
+<!--                        </view>-->
+<!--                    </view>-->
+<!--                </view>-->
+<!--            </view>-->
+<!--            >-->
+<!--        </view>-->
+<!--    </block>-->
+
+
 
     <button bind:tap="handlePushAbout">获取所有大学</button>
+    <button bindtap="commonTuijian" class="tuijian-btn btn-font"
+            style="background:#{{color}};box-shadow:0px 0px 5px #{{color}}">院校智能推荐
+    </button>
 
 
 </view>

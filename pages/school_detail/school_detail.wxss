@@ -1,0 +1,129 @@
+/* pages/detail/detail.wxss */
+@font-face {
+    font-family: "iconfont";
+    font-weight: normal;
+    font-style: normal;
+}
+
+.container {
+    -webkit-font-smoothing: antialiased;
+    padding: 0 25rpx;
+    height: auto;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.meta-header {
+    font-size: 14px;
+    color: #666;
+    opacity: .8;
+    text-align: left;
+    width: 100%;
+    margin: 20rpx 0 25rpx;
+    font-family: 'iconfont';
+}
+
+.meta-header .author:before {
+    content: '\e688';
+    margin-right: 10rpx;
+}
+
+.meta-header .posted-date {
+    margin-left: 30rpx;
+}
+.meta-header .posted-date:before {
+    content: '\e64e';
+    margin-right: 10rpx;
+}
+
+.meta-footer {
+    font-size: 14px;
+    color: #666;
+    opacity: .8;
+    text-align: left;
+    width: 100%;
+    margin: 15rpx 0 20rpx;
+    font-family: 'iconfont';
+}
+
+.meta-footer .views:before {
+    content: '\e666';
+    margin-right: 10rpx;
+}
+
+.meta-footer .votes {
+    margin-right: 10rpx;
+    float: right;
+}
+
+.meta-footer .votes:before {
+    content: '\e61a';
+    margin-right: 10rpx;
+}
+
+.content {
+    -webkit-font-smoothing: antialiased;
+    width: 100%;
+    font-size: 14px;
+    color: #424242;
+    margin: 20rpx 0;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.content:after {
+    content: "";
+    flex: auto;
+}
+
+.content.description {
+    margin-bottom: 40rpx;
+    color: #999;
+}
+
+.content .p_class {
+    margin: 0 0 15rpx;
+    outline: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+.content .img_class {
+    max-width: 30%;
+    height: auto;
+    clear: both;
+    display: block;
+    margin: 0 auto;
+}
+
+.content .h3_class {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    clear: both;
+}
+
+.content_index {
+    display: flex;
+    background-color: #ffffff;
+    height: 100%;
+    flex-direction: row;
+}
+
+.content_index .img_class {
+    max-width: 30%;
+    height: auto;
+    /*clear: both;*/
+    display: flex;
+    margin: 0 auto;
+}
+.content_index .h3_class {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    clear: both;
+}
+
