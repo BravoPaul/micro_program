@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="494221b8-21c9-4801-9224-ecdeede18c9c" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Wechat mini program page js file(Page API)" />
+        <option value="Wechat mini program page json file(Page API)" />
+      </list>
+    </option>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="index.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/pages/index/index.js" working-dir="$PROJECT_DIR$/pages/index">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.index.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="494221b8-21c9-4801-9224-ecdeede18c9c" name="Default Changelist" comment="" />
+      <created>1593135392046</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1593135392046</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1593226637958">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593226637958" />
+    <state x="417" y="128" key="#index.js" timestamp="1593224799236">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="417" y="128" key="#index.js/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593224799236" />
+    <state width="1419" height="304" key="GridCell.Tab.0.bottom" timestamp="1593261697313">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.0.bottom/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697313" />
+    <state width="1419" height="304" key="GridCell.Tab.0.center" timestamp="1593261697311">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.0.center/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697311" />
+    <state width="1419" height="304" key="GridCell.Tab.0.left" timestamp="1593261697310">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.0.left/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697310" />
+    <state width="1419" height="304" key="GridCell.Tab.0.right" timestamp="1593261697312">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.0.right/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697312" />
+    <state width="1419" height="304" key="GridCell.Tab.1.bottom" timestamp="1593261697315">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.1.bottom/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697315" />
+    <state width="1419" height="304" key="GridCell.Tab.1.center" timestamp="1593261697314">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.1.center/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697314" />
+    <state width="1419" height="304" key="GridCell.Tab.1.left" timestamp="1593261697313">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.1.left/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697313" />
+    <state width="1419" height="304" key="GridCell.Tab.1.right" timestamp="1593261697315">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.1.right/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697315" />
+    <state width="1419" height="304" key="GridCell.Tab.2.bottom" timestamp="1593261697318">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.2.bottom/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697318" />
+    <state width="1419" height="304" key="GridCell.Tab.2.center" timestamp="1593261697317">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.2.center/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697317" />
+    <state width="1419" height="304" key="GridCell.Tab.2.left" timestamp="1593261697316">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.2.left/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697316" />
+    <state width="1419" height="304" key="GridCell.Tab.2.right" timestamp="1593261697317">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.2.right/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697317" />
+    <state width="1419" height="304" key="GridCell.Tab.3.bottom" timestamp="1593261697320">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.3.bottom/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697320" />
+    <state width="1419" height="304" key="GridCell.Tab.3.center" timestamp="1593261697319">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.3.center/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697319" />
+    <state width="1419" height="304" key="GridCell.Tab.3.left" timestamp="1593261697318">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.3.left/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697318" />
+    <state width="1419" height="304" key="GridCell.Tab.3.right" timestamp="1593261697320">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1419" height="304" key="GridCell.Tab.3.right/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593261697320" />
+    <state x="229" y="89" key="SettingsEditor" timestamp="1593139875764">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="229" y="89" key="SettingsEditor/-2560.-467.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593139875764" />
+    <state x="421" y="39" width="598" height="822" key="find.popup" timestamp="1593346549447">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="421" y="39" width="598" height="822" key="find.popup/-2560.0.2560.1440/0.0.1440.900@0.0.1440.900" timestamp="1593346549447" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
