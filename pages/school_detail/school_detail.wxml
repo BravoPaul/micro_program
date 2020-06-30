@@ -1,12 +1,9 @@
-<view class="content">
+<view class="content_meta">
     <view class="title">
+        <rich-text nodes="{{school.meta.logo}}"></rich-text>
+        <!-- <text >fasdfsadfsdfsdf</text> -->
         <rich-text nodes="{{school.meta.title}}"></rich-text>
     </view>
-
-    <view>
-        <rich-text nodes="{{school.meta.logo}}"></rich-text>
-    </view>
-    
     <rich-text nodes="{{school.meta.tag}}"></rich-text>
 </view>
 <view class="swiper-tab">
@@ -36,9 +33,35 @@
         </scroll-view>
     </swiper-item>
     <swiper-item>
-        <view>录取分数</view>
+        <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot">
+            <view class="content">
+                <text>历年录取分数线</text>
+            </view>
+            <view class="container" bindtap="close">
+                <view class="select-wrap">
+                    <select id="select" defaultOption="{{score.wenli_defaut}}" options="{{score.wenli}}" key="wenli_id" text="wenli_name" bind:change="change_score_wenli"></select>
+                </view>
+            </view>
+            <view style='padding : 10rpx;'>
+                <etable config="{{score.yearScore}}"></etable>
+            </view>
+            <view class="container" bindtap="close">
+                <view class="content">
+                    <text>专业录取分数线</text>
+                </view>
+                <view class="select-wrap">
+                    <select id="select" defaultOption="{{score.year_major_defaut}}" options="{{score.year_major}}" key="wenli_id" text="wenli_name" bind:change="change_major_year"></select>
+                </view>
+                <view class="select-wrap">
+                    <select id="select" defaultOption="{{score.wenli_major_defaut}}" options="{{score.wenli_major}}" key="wenli_id" text="wenli_name" bind:change="change_major_wenli"></select>
+                </view>
+            </view>
+            <view style='padding : 10rpx;'>
+                <etable config="{{score.majorScore}}"></etable>
+            </view>
+        </scroll-view>
     </swiper-item>
-    <swiper-item>
+    <!-- <swiper-item>
         <view>页面三</view>
-    </swiper-item>
+    </swiper-item> -->
 </swiper>

@@ -57,23 +57,98 @@ const app = getApp()
 Page({
     data: {
         select: false,
-        tihuoWay: '省份',
+        province: '省份',
         items: [
-            {value: 1, name: '文科', checked: 'false'},
-            {value: 2, name: '理科', checked: 'true'},
+            { value: 1, name: '文科', checked: 'false' },
+            { value: 2, name: '理科', checked: 'true' },
         ],
         wenli: 2,
         score: -1,
         result_list: [],
+        options: [{
+            wenli_id: 2,
+            wenli_name: '理科'
+        },
+        ],
+        wenli_selected: {
+            id: 1,
+            name: '文科'
+        },
+
+        config:{
+            content :[],
+            titles: ['id', '名字', '年龄', '学校'],
+            props : ['id', 'name', 'age', 'school'],
+            columnWidths: ['80rpx', '140rpx', '120rpx','390rpx'],
+            border: true,
+            stripe : true,
+            // headbgcolor : '#dddddd'
+          }
     },
+
+
+
+    change(e) {
+        this.setData({
+            selected: { ...e.detail }
+        })
+        wx.showToast({
+            title: `${this.data.selected.id} - ${this.data.selected.name}`,
+            icon: 'success',
+            duration: 1000
+        })
+    },
+    close() {
+        // 关闭select
+        this.selectComponent('#select').close()
+    },
+
+
+
+
     onLoad: function (options) {
+
+        let  content = [
+            {
+              id: 1,
+              name: 'pxh',
+              age: 13,
+              school: '暨南大学计算机'
+            },
+            {
+              id: 2,
+              name: 'ap',
+              age: 12,
+              school: '中山大学'
+            },
+            {
+              id: 3,
+              name: 'cf',
+              age: 12,
+              school: '华南农业大学'
+            },
+            {
+              id: 4,
+              name: '林江',
+              age: 14,
+              school: '上海交通大学'
+            }
+          ]
+          let that = this
+          // 此处模拟网络请求
+          setTimeout(function(){
+            that.setData({
+              'config.content' : content
+            })
+          },1000)
+
     },
     bindShowMsg() {
-        this.setData({select: !this.data.select})
+        this.setData({ select: !this.data.select })
     },
     mySelect(e) {
         var name = e.currentTarget.dataset.name
-        this.setData({tihuoWay: name, select: false})
+        this.setData({ province: name, select: false })
     },
     onShareAppMessage: function () {
     },

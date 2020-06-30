@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "select": "/components/selector/selector",
+    "etable" : "/components/etable/etable"
+  }
 }

@@ -77,13 +77,16 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded',
             },
             success: res => {
+                let result = []
                 if (res.statusCode == 200) { //服务端处理正常，登录成功
                     //wx.setStorageSync("cookies", res.header["Set-Cookie"]); //存进去的是所有cookie串在一起的字符串，包括csrftoken和sessionid，但我们不要用这个方式，原因见下文介绍
                     res.data.forEach(function (value) {
-                        that.data.item = that.data.item.concat(value.fields)
+                        let value_format = value.fields
+                        value_format.sch_id = value.pk
+                        result = result.concat(value_format)
                     });
                     that.setData({
-                        'item': that.data.item
+                        'item': that.data.item.concat(result)
 
                     })
                 }
