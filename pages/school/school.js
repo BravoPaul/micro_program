@@ -41,6 +41,7 @@ Page({
         })
     },
     onPullDownRefresh: function () {
+        let that = this
         // 标题栏显示刷新图标，转圈圈
         wx.showNavigationBarLoading()
 
