@@ -1,109 +1,75 @@
 <!-- index.wxml -->
-<view class="container_score">
-    <view class="container" bindtap="close">
-        <view class="select-wrap">
-            <select id="select" defaultOption="{{wenli_selected}}" options="{{options}}" key="wenli_id" text="wenli_name" bind:change="change"></select>
+<!-- <view class="container_score">
+    
+    
+    <button bind:tap="handlePushAbout">获取所有大学</button>
+    
+</view> -->
+<cu-custom bgColor="bg-gradual-pink" isBack="False">
+    <view slot="content">雷锋帮帮我</view>
+</cu-custom>
+<view class="cu-bar bg-white">
+    <view class="action">
+        <text class="cuIcon-title text-blue"></text>
+        我知道你会来，所以我等
+    </view>
+</view>
+<swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+    <swiper-item wx:for="{{swiperList}}" wx:key>
+        <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+        <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+    </swiper-item>
+</swiper>
+<view>
+    <view class="cu-bar bg-white flex solid-bottom padding justify-between">
+        <view class="flex justify-center" style="flex-direction: column;">
+            <image style="width: 50px; height: 50px;margin-bottom: 5px;" src='/images/school.png' mode='widthFix' bind:tap="handlePushAbout"></image>
+            <text>学校查询</text>
+        </view>
+        <view class="flex justify-center" style="flex-direction: column">
+            <image style="width: 50px; height: 50px;margin-bottom: 5px" src='/images/major.png' mode='widthFix' bind:tap="handlePushAbout2"></image>
+            <text>专业查询</text>
+        </view>
+        <view class="flex justify-center" style="flex-direction: column">
+            <image style="width: 50px; height: 50px;margin-bottom: 5px" src='/images/onetoone.png' mode='widthFix' bind:tap="handlePushAbout2"></image>
+            <text>专家一对一</text>
         </view>
     </view>
-    <view style='padding : 10rpx;'>
-        <etable config="{{config}}"></etable>
-    </view>
-    <!-- <view class="score"> -->
-    <!-- <text>输入成绩</text> -->
-    <!-- </view> -->
-    <!-- <view class="userinfo"> -->
-    <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取头像昵称 -->
-    <!-- </button> -->
-    <!-- <block wx:else> -->
-    <!-- <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image> -->
-    <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
-    <!-- </block> -->
-    <!-- </view> -->
-    <!-- <view class="usermotto"> -->
-    <!-- <text class="user-motto">{{motto}}</text> -->
-    <!-- <text class="user-motto">{{time}}</text> -->
-    <!-- </view> -->
-    <!-- <view class="page-section"> -->
-    <!-- <view class="page-section-title">请选择文理科</view> -->
-    <!-- <view class="weui-cells weui-cells_after-title"> -->
-    <!-- <radio-group bindchange="radioChange"> -->
-    <!-- <label class="radio-wenli" wx:for="{{items}}" wx:key="{{item.value}}"> -->
-    <!-- <radio value="{{item.value}}" checked="true"/>{{item.name}} -->
-    <!-- </label> -->
-    <!-- </radio-group> -->
-    <!-- </view> -->
-    <!-- </view> -->
-    <!-- <view class='list-msg'> -->
-    <!-- <view class='list-msg1'> -->
-    <!-- <text>选择省份</text> -->
-    <!-- </view> -->
-    <!-- <view class='list-msg2' bindtap='bindShowMsg'> -->
-    <!-- <text>{{tihuoWay}}</text> -->
-    <!-- </view> -->
-    <!-- <view class="select_box" wx:if="{{select}}"> -->
-    <!-- <view class="select_one" bindtap="mySelect" data-name="河北">河北</view> -->
-    <!-- <view class="select_one" bindtap="mySelect" data-name="河南">河南</view> -->
-    <!-- <view class="select_one" bindtap="mySelect" data-name="山东">山东</view> -->
-    <!-- </view> -->
-    <!-- </view> -->
-    <!-- <view class="page-section"> -->
-    <!-- <view class="weui-cells__title">分数</view> -->
-    <!-- <view class="weui-cells weui-cells_after-title"> -->
-    <!-- <view class="weui-cell weui-cell_input"> -->
-    <!-- <input class="weui-input" type="number" bindinput="bindKeyInput"/> -->
-    <!-- </view> -->
-    <!-- </view> -->
-    <!-- </view> -->
-    <!-- <view class="button-sp-area"> -->
-    <!-- <button type="default" plain="true" bindtap="recommend">智能推荐</button> -->
-    <!-- </view> -->
-    <!-- <view wx:if="{{item == ''}}"> -->
-    <!-- {% csrf_token %} -->
-    <!-- <form bindsubmit="formSubmit" bindreset="formReset"> -->
-    <!-- <view class="cu-form-group margin-top"> -->
-    <!-- <view class='title'>输入要查询的城市名称</view> -->
-    <!-- <input class='radius' id='city' name="city"></input> -->
-    <!-- </view> -->
-    <!-- <view class="padding flex flex-direction"> -->
-    <!-- <button class='cu-btn bg-red margin-tb-sm lg'formType="submit">提交</button> -->
-    <!-- </view> -->
-    <!-- </form> -->
-    <!-- </view> -->
-    <!-- <block> -->
-    <!-- <view class="wrapper"> -->
-    <!-- <view class="content-font" style="margin-top:57vw;"> -->
-    <!-- <view class="nav" style="padding-top:20rpx;"> -->
-    <!-- <view bindtap="goDetail" data-type="findUniversity" hoverClass="btnHover" openType="navigate"> -->
-    <!-- <view class="nav-li flex" style="flex-direction:row;"> -->
-    <!-- <image src="http://youzy-appfile.cn-bj.ufileos.com/style1/1.png"></image> -->
-    <!-- <view class="oneFontColor twoFontSize lineHeight">找大学</view> -->
-    <!-- </view> -->
-    <!-- </view> -->
-    <!-- <view bindtap="goDetail" data-type="selectMajor" hoverClass="btnHover" openType="navigate"> -->
-    <!-- <view class="nav-li flex" style="flex-direction:row;"> -->
-    <!-- <image src="http://youzy-appfile.cn-bj.ufileos.com/style1/2.png"></image> -->
-    <!-- <view class="oneFontColor twoFontSize lineHeight">查专业</view> -->
-    <!-- </view> -->
-    <!-- </view> -->
-    <!-- <view bindtap="goDetail" data-type="career" hoverClass="btnHover"> -->
-    <!-- <view class="nav-li flex" style="flex-direction:row;"> -->
-    <!-- <image src="http://youzy-appfile.cn-bj.ufileos.com/style1/3.png"></image> -->
-    <!-- <view class="oneFontColor twoFontSize lineHeight">看职业</view> -->
-    <!-- </view> -->
-    <!-- </view> -->
-    <!-- <view bindtap="goDetail" data-type="advanceBatch" hoverClass="btnHover"> -->
-    <!-- <view class="nav-li flex" style="flex-direction:row;"> -->
-    <!-- <image src="http://youzy-appfile.cn-bj.ufileos.com/style1/4.png"></image> -->
-    <!-- <view class="oneFontColor twoFontSize lineHeight">提前批</view> -->
-    <!-- </view> -->
-    <!-- </view> -->
-    <!-- </view> -->
-    <!-- </view> -->
-    <!-- > -->
-    <!-- </view> -->
-    <!-- </block> -->
-    <button bind:tap="handlePushAbout">获取所有大学</button>
-    <button bindtap="commonTuijian" class="tuijian-btn btn-font" style="background:#{{color}};box-shadow:0px 0px 5px #{{color}}">
-        院校智能推荐
-    </button>
 </view>
+<view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="solid-bottom text-xl padding">
+        <text class="text-black text-bold">高考智能志愿填报</text>
+    </view>
+</view>
+<view class="cu-form-group">
+    <view class="title">省份</view>
+    <picker mode="region" bindchange="RegionChange" value="{{region}}" custom-item="{{customItem}}">
+        <view class="picker">{{region[0]}}</view>
+    </picker>
+</view>
+<view class="cu-form-group">
+    <view class="page-section">
+        <label class="radio">
+            <radio value="r1" checked="true" />
+            文科
+        </label>
+        <label class="radio">
+            <radio value="r2" />
+            理科
+        </label>
+    </view>
+</view>
+<view class="cu-form-group">
+    <input placeholder="请输入高考分数"></input>
+</view>
+<view class="padding flex flex-direction">
+    <button class="cu-btn bg-red margin-tb-sm lg">智能填报</button>
+</view>
+<scroll-view scroll-x class="bg-white nav text-center" style="align-items:justify-between">
+  <view class="cu-item {{0==TabCur?'text-white cur':''}}" bindtap="tabSelect" data-id="0">
+    <text class="cuIcon-home"></text> 高考报名
+  </view>
+  <view class="cu-item {{1==TabCur?'text-white cur':''}}" bindtap="tabSelect" data-id="1">
+    <text class="cuIcon-friend"></text> 学生社区
+  </view>
+</scroll-view>

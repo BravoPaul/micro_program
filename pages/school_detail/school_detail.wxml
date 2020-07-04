@@ -4,7 +4,9 @@
         <!-- <text >fasdfsadfsdfsdf</text> -->
         <rich-text nodes="{{school.meta.title}}"></rich-text>
     </view>
-    <rich-text nodes="{{school.meta.tag}}"></rich-text>
+    <view class="tags">
+        <rich-text nodes="{{school.meta.tag}}"></rich-text>
+    </view>
 </view>
 <view class="swiper-tab">
     <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">

@@ -56,184 +56,125 @@ const app = getApp()
 
 Page({
     data: {
-        select: false,
-        province: '省份',
-        items: [
-            { value: 1, name: '文科', checked: 'false' },
-            { value: 2, name: '理科', checked: 'true' },
-        ],
-        wenli: 2,
-        score: -1,
-        result_list: [],
-        options: [{
-            wenli_id: 2,
-            wenli_name: '理科'
-        },
-        ],
-        wenli_selected: {
+        cardCur: 0,
+        swiperList: [{
+            id: 0,
+            type: 'image',
+            url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
+        }, {
             id: 1,
-            name: '文科'
-        },
-
-        config:{
-            content :[],
-            titles: ['id', '名字', '年龄', '学校'],
-            props : ['id', 'name', 'age', 'school'],
-            columnWidths: ['80rpx', '140rpx', '120rpx','390rpx'],
-            border: true,
-            stripe : true,
-            // headbgcolor : '#dddddd'
-          }
+            type: 'image',
+            url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
+        }, {
+            id: 2,
+            type: 'image',
+            url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
+        }, {
+            id: 3,
+            type: 'image',
+            url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
+        }, {
+            id: 4,
+            type: 'image',
+            url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big25011.jpg'
+        }, {
+            id: 5,
+            type: 'image',
+            url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big21016.jpg'
+        }, {
+            id: 6,
+            type: 'image',
+            url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
+        }],
+        region: ['广东省'],
     },
-
-
-
-    change(e) {
+    onLoad() {
+        this.towerSwiper('swiperList');
+        // 初始化towerSwiper 传已有的数组名即可
+    },
+    DotStyle(e) {
         this.setData({
-            selected: { ...e.detail }
-        })
-        wx.showToast({
-            title: `${this.data.selected.id} - ${this.data.selected.name}`,
-            icon: 'success',
-            duration: 1000
+            DotStyle: e.detail.value
         })
     },
-    close() {
-        // 关闭select
-        this.selectComponent('#select').close()
+    // cardSwiper
+    cardSwiper(e) {
+        this.setData({
+            cardCur: e.detail.current
+        })
     },
-
-
-
-
-    onLoad: function (options) {
-
-        let  content = [
-            {
-              id: 1,
-              name: 'pxh',
-              age: 13,
-              school: '暨南大学计算机'
-            },
-            {
-              id: 2,
-              name: 'ap',
-              age: 12,
-              school: '中山大学'
-            },
-            {
-              id: 3,
-              name: 'cf',
-              age: 12,
-              school: '华南农业大学'
-            },
-            {
-              id: 4,
-              name: '林江',
-              age: 14,
-              school: '上海交通大学'
+    // towerSwiper
+    // 初始化towerSwiper
+    towerSwiper(name) {
+        let list = this.data[name];
+        for (let i = 0; i < list.length; i++) {
+            list[i].zIndex = parseInt(list.length / 2) + 1 - Math.abs(i - parseInt(list.length / 2))
+            list[i].mLeft = i - parseInt(list.length / 2)
+        }
+        this.setData({
+            swiperList: list
+        })
+    },
+    // towerSwiper触摸开始
+    towerStart(e) {
+        this.setData({
+            towerStart: e.touches[0].pageX
+        })
+    },
+    // towerSwiper计算方向
+    towerMove(e) {
+        this.setData({
+            direction: e.touches[0].pageX - this.data.towerStart > 0 ? 'right' : 'left'
+        })
+    },
+    // towerSwiper计算滚动
+    towerEnd(e) {
+        let direction = this.data.direction;
+        let list = this.data.swiperList;
+        if (direction == 'right') {
+            let mLeft = list[0].mLeft;
+            let zIndex = list[0].zIndex;
+            for (let i = 1; i < list.length; i++) {
+                list[i - 1].mLeft = list[i].mLeft
+                list[i - 1].zIndex = list[i].zIndex
             }
-          ]
-          let that = this
-          // 此处模拟网络请求
-          setTimeout(function(){
-            that.setData({
-              'config.content' : content
+            list[list.length - 1].mLeft = mLeft;
+            list[list.length - 1].zIndex = zIndex;
+            this.setData({
+                swiperList: list
             })
-          },1000)
-
-    },
-    bindShowMsg() {
-        this.setData({ select: !this.data.select })
-    },
-    mySelect(e) {
-        var name = e.currentTarget.dataset.name
-        this.setData({ province: name, select: false })
-    },
-    onShareAppMessage: function () {
-    },
-    radioChange(e) {
-        console.log('radio发生change事件，携带value值为：', e.detail.value)
-        this.data.wenli = e.detail.value
-
-        const items = this.data.items
-        for (let i = 0, len = items.length; i < len; ++i) {
-            items[i].checked = items[i].value === e.detail.value
+        } else {
+            let mLeft = list[list.length - 1].mLeft;
+            let zIndex = list[list.length - 1].zIndex;
+            for (let i = list.length - 1; i > 0; i--) {
+                list[i].mLeft = list[i - 1].mLeft
+                list[i].zIndex = list[i - 1].zIndex
+            }
+            list[0].mLeft = mLeft;
+            list[0].zIndex = zIndex;
+            this.setData({
+                swiperList: list
+            })
         }
-
+    },
+    RegionChange: function (e) {
         this.setData({
-            items
+            region: e.detail.value
         })
     },
-    bindKeyInput: function (e) {
-        this.data.score = parseInt(e.detail.value)
 
-    },
-    recommend() {
-
-        if (this.data.score < 0) {
-            console.log('请输入正确的分数')
-        } else {
-            console.log('省份：', this.data.tihuoWay)
-            console.log('文理科：', this.data.wenli)
-            console.log('分数：', this.data.score)
-            wx.request({
-                url: 'http://30.77.54.40:8080/gaokao/index',
-                method: 'POST',
-                data: {
-                    'name': '清华大学',
-
-                },
-                header: {
-                    'content-type': 'application/x-www-form-urlencoded',
-                },
-                success: res => {
-                    if (res.statusCode == 200) { //服务端处理正常，登录成功
-                        //wx.setStorageSync("cookies", res.header["Set-Cookie"]); //存进去的是所有cookie串在一起的字符串，包括csrftoken和sessionid，但我们不要用这个方式，原因见下文介绍
-                        console.log(res.data)
-                    }
-                },
-            })
-        }
-    },
-    // formSubmit: function (e) {
-    //     var obj = this;
-    //     var post = e.detail.value;
-    //     // console.log(e.detail.value);
-    //     //请求接口
-    //     wx.request({
-    //         //这里是你要调用的接口
-    //         url: 'http://192.168.1.7:8080/gaokao',
-    //         header: {
-    //             "Content-Type": "application/x-www-form-urlencoded",
-    //             "Cookie": "csrftoken=vmYa1IXXNsPfs5h3i1YxNR9PTXkm07wYwkaJylbw7av2UfzG02ZfpvQl7cxlBLbF",
-    //             "Host": "192.168.1.7:8080",
-    //             "Referer": "http://192.168.1.7:8080/polls/1/"
-    //
-    //         },
-    //         method: "POST",
-    //         data: {
-    //             "csrfmiddlewaretoken": 'r5Faea31nrflNxm5Oxi6Bs9zskL8xkT3s3RJLNhAH9V8fHEIwyjOd6Q5GzY78YyK&choice=3'
-    //
-    //         },
-    //         success: function (res) {
-    //             //请求成功后的回调
-    //             console.log(res.data.result);
-    //             // var result = res.data.result,
-    //             //赋值
-    //             obj.setData({
-    //                 item: res.data.result,
-    //                 // realtime: res.data.result.city.realtime
-    //             })
-    //         },
-    //         fail: function () {
-    //             console.log('提交失败');
-    //         }
-    //     })
-    // },
     handlePushAbout() {
         wx.navigateTo({
             url: '/pages/school/school',
         })
+        console.log('圆形图片好了')
+    },
+
+    handlePushAbout2() {
+        
+        console.log('圆形图片好了')
     }
+
 })
+
+

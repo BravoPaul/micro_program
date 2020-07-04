@@ -1,16 +1,15 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/logs/logs",
     "pages/school/school",
     "pages/school_detail/school_detail"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "雷锋帮帮我",
-    "navigationBarTextStyle":"black"
+  "window": {
+    "navigationStyle": "custom"
   },
-  "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap3.json"
 }

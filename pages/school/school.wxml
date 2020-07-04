@@ -1,81 +1,133 @@
-<!--index.wxml-->
+<!-- index.wxml -->
 <view class="container_score">
-    <!--    <view class="score">-->
-    <!--        <text>输入成绩</text>-->
-    <!--    </view>-->
-    <!--    <view class="userinfo">-->
-    <!--        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取头像昵称-->
-    <!--        </button>-->
-    <!--        <block wx:else>-->
-    <!--            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>-->
-    <!--            <text class="userinfo-nickname">{{userInfo.nickName}}</text>-->
-    <!--        </block>-->
-    <!--    </view>-->
-    <!--    <view class="usermotto">-->
-    <!--        <text class="user-motto">{{motto}}</text>-->
-    <!--        <text class="user-motto">{{time}}</text>-->
-    <!--    </view>-->
-
-    <!--    <view class="page-section">-->
-
-    <!--        <view class="page-section-title">请选择文理科</view>-->
-    <!--        <view class="weui-cells weui-cells_after-title">-->
-    <!--            <radio-group bindchange="radioChange">-->
-    <!--                <label class="radio-wenli" wx:for="{{items}}" wx:key="{{item.value}}">-->
-    <!--                    <radio value="{{item.value}}" checked="true"/>{{item.name}}-->
-    <!--                </label>-->
-    <!--            </radio-group>-->
-    <!--        </view>-->
-    <!--    </view>-->
-
-    <!--    <view class='list-msg'>-->
-    <!--        <view class='list-msg1'>-->
-    <!--            <text>选择省份</text>-->
-    <!--        </view>-->
-    <!--        <view class='list-msg2' bindtap='bindShowMsg'>-->
-    <!--            <text>{{tihuoWay}}</text>-->
-    <!--        </view>-->
-    <!--        <view class="select_box" wx:if="{{select}}">-->
-    <!--            <view class="select_one" bindtap="mySelect" data-name="河北">河北</view>-->
-    <!--            <view class="select_one" bindtap="mySelect" data-name="河南">河南</view>-->
-    <!--            <view class="select_one" bindtap="mySelect" data-name="山东">山东</view>-->
-    <!--        </view>-->
-    <!--    </view>-->
-
-    <!--    <view class="page-section">-->
-    <!--        <view class="weui-cells__title">分数</view>-->
-    <!--        <view class="weui-cells weui-cells_after-title">-->
-    <!--            <view class="weui-cell weui-cell_input">-->
-    <!--                <input class="weui-input" type="number" bindinput="bindKeyInput"/>-->
-    <!--            </view>-->
-    <!--        </view>-->
-    <!--    </view>-->
-
-    <!--    <view class="button-sp-area">-->
-
-    <!--        <button type="default" plain="true" bindtap="recommend">智能推荐</button>-->
-
-    <!--    </view>-->
-
-    <!--    <view wx:if="{{item == ''}}">-->
-    <!--        {% csrf_token %}-->
-    <!--        <form bindsubmit="formSubmit" bindreset="formReset">-->
-    <!--            <view class="cu-form-group margin-top">-->
-    <!--                <view class='title'>输入要查询的城市名称</view>-->
-    <!--                <input class='radius' id='city' name="city"></input>-->
-    <!--            </view>-->
-    <!--            <view class="padding flex flex-direction">-->
-    <!--                <button class='cu-btn bg-red margin-tb-sm lg'formType="submit">提交</button>-->
-    <!--            </view>-->
-    <!--        </form>-->
-    <!--    </view>-->
-
+    <view class='cu-custom'>
+        <view class="cu-bar fixed bg-shadeTop" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+            <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+                <text class='cuIcon-back'></text>
+                返回
+            </navigator>
+            <view class='content' style='top:{{StatusBar}}px;'>大学列表</view>
+        </view>
+    </view>
+    <swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+        <swiper-item wx:for="{{4}}" wx:key>
+            <image src="https://image.weilanwl.com/img/4x3-{{index+1}}.jpg" mode='aspectFill'></image>
+        </swiper-item>
+    </swiper>
+    <view class="VerticalBox">
+        <scroll-view class="VerticalNav nav padding-top" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 375rpx)">
+            <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{list}}" wx:key bindtap='tabSelect' data-id="{{index}}" style="height:auto">
+                <text>{{item.type}}</text>
+            </view>
+        </scroll-view>
+        <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
+            <view class="padding-top padding-lr" wx:for="{{list}}" wx:key id="main-{{index}}">
+                <view class='cu-bar solid-bottom bg-white'>
+                    <view class='action'>
+                        <text class='cuIcon-title text-green'></text>
+                        {{item.type}}
+                    </view>
+                </view>
+                <view class="cu-list menu-avatar" wx:for="{{item.content}}">
+                    <view class="cu-item">
+                        <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+                        <view class="content">
+                            <view class="text-grey">{{item.name}}</view>
+                            <view class="text-gray text-sm flex">
+                                <text class="text-cut">
+                                    <text class="cuIcon-infofill text-red  margin-right-xs"></text>
+                                    {{item.langue}}
+                                </text>
+                            </view>
+                        </view>
+                        <view class="action">
+                            <view class="text-grey text-xs">22:20</view>
+                            <view class="cu-tag round bg-grey sm">5</view>
+                        </view>
+                    </view>
+                    <!-- <view class="cu-item">
+                        <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Taric.png);">
+                            <view class="cu-tag badge">99+</view>
+                        </view>
+                        <view class="content">
+                            <view class="text-grey">
+                                <text class="text-cut">瓦洛兰之盾-塔里克</text>
+                                <view class="cu-tag round bg-orange sm">战士</view>
+                            </view>
+                            <view class="text-gray text-sm flex">
+                                <text class="text-cut">
+                                    塔里克是保护者星灵，用超乎寻常的力量守护着符文之地的生命、仁爱以及万物之美。塔里克由于渎职而被放逐，离开了祖国德玛西亚，前去攀登巨神峰寻找救赎，但他找到的却是来自星界的更高层的召唤。现在的塔里克与古代巨神族的神力相融合，以瓦洛兰之盾的身份，永不疲倦地警惕着阴险狡诈的虚空腐化之力。
+                                </text>
+                            </view>
+                        </view>
+                        <view class="action">
+                            <view class="text-grey text-xs">22:20</view>
+                            <view class="cuIcon-notice_forbid_fill text-gray"></view>
+                        </view>
+                    </view>
+                    <view class="cu-item ">
+                        <view class="cu-avatar radius lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view>
+                        <view class="content">
+                            <view class="text-pink">
+                                <text class="text-cut">莫甘娜</text>
+                            </view>
+                            <view class="text-gray text-sm flex">
+                                <text class="text-cut">凯尔，你被自己的光芒变的盲目！</text>
+                            </view>
+                        </view>
+                        <view class="action">
+                            <view class="text-grey text-xs">22:20</view>
+                            <view class="cu-tag round bg-red sm">5</view>
+                        </view>
+                    </view>
+                    <view class="cu-item grayscale">
+                        <view class="cu-avatar radius lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big81007.jpg);"></view>
+                        <view class="content">
+                            <view>
+                                <text class="text-cut">伊泽瑞尔</text>
+                                <view class="cu-tag round bg-orange sm">断开连接...</view>
+                            </view>
+                            <view class="text-gray text-sm flex">
+                                <text class="text-cut">等我回来一个打十个</text>
+                            </view>
+                        </view>
+                        <view class="action">
+                            <view class="text-grey text-xs">22:20</view>
+                            <view class="cu-tag round bg-red sm">5</view>
+                        </view>
+                    </view>
+                    <view class="cu-item cur">
+                        <view class="cu-avatar radius lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big81020.jpg);">
+                            <view class="cu-tag badge"></view>
+                        </view>
+                        <view class="content">
+                            <view>
+                                <text class="text-cut">瓦罗兰大陆-睡衣守护者-新手保护营</text>
+                                <view class="cu-tag round bg-orange sm">6人</view>
+                            </view>
+                            <view class="text-gray text-sm flex">
+                                <text class="text-cut">
+                                    伊泽瑞尔：
+                                    <text class="cuIcon-locationfill text-orange margin-right-xs"></text>
+                                    传送中...
+                                </text>
+                            </view>
+                        </view>
+                        <view class="action">
+                            <view class="text-grey text-xs">22:20</view>
+                            <view class="cuIcon-notice_forbid_fill text-gray"></view>
+                        </view>
+                    </view> -->
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    
+    
     <view class='container'>
-
         <block class="" wx:for="{{item}}" wx:key="id">
-            <view hover-class='hover-class' id="{{item.sch_id}}" catchtap="schClick"
-                  style='display:flex; height:120px;border-bottom: 1px solid #DBDBDB'>
-                <!--左边图片-->
+            <view hover-class='hover-class' id="{{item.sch_id}}" catchtap="schClick" style='display:flex; height:120px;border-bottom: 1px solid #DBDBDB'>
+                <!-- 左边图片 -->
                 <view style='width:128rpx; height:128rpx; margin:20rpx;'>
                     <image class='index-logo' style='width:128rpx; height:128rpx' src="{{item.sch_logo}}"></image>
                 </view>
@@ -84,20 +136,16 @@
                     <label class='item_title'>{{item.sch_name}}</label>
                     <label class='item_content'>{{item.sch_tags}}</label>
                     <!-- 右边底部内容 左右结构 -->
-                    <!--                    <view style='display:flex; flex-direction:row; height:40rpx;'>-->
-                    <!--                        <label class='item_from'>{{item.merchant_name}}</label>-->
-                    <!--                        <label class='item_time'>{{item.consumption_date}}</label>-->
-                    <!--                    </view>-->
+                    <!-- <view style='display:flex; flex-direction:row; height:40rpx;'> -->
+                    <!-- <label class='item_from'>{{item.merchant_name}}</label> -->
+                    <!-- <label class='item_time'>{{item.consumption_date}}</label> -->
+                    <!-- </view> -->
                 </view>
             </view>
         </block>
     </view>
-
-
     <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
         <view class="weui-loading"></view>
         <view class="weui-loadmore__tips">正在加载</view>
     </view>
-
-
 </view>

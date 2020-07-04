@@ -331,7 +331,7 @@ Page(
             }
 
             wx.request({
-                url: 'http://192.168.1.7:8080/gaokao/detail',
+                url: 'http://192.168.1.5:8080/gaokao/detail',
                 method: 'POST',
                 data: {
                     'sch_id': sch_id,
@@ -352,6 +352,7 @@ Page(
                     let result_score_like = []
                     if (res.statusCode == 200) { //服务端处理正常，登录成功
                         let result_list = res.data
+                        console.log(result_list)
                         result_list.forEach(function (value) {
                             if (value.model === 'gaokao.schooldetail') {
                                 let value_field = value.fields
@@ -436,7 +437,7 @@ Page(
                             'score.yearScore_wenke_content': result_score_wenke,
                             'score.yearScore_like_content': result_score_like,
                             'score.yearScore.content': result_score_wenke,
-                            'score.majorScore.content': that.data.score.major_content['wenli_1']['year_2018'],
+                            'score.majorScore.content': that.data.score.major_content['wenli_1']['year_2019'],
                         })
                     }
                 },
