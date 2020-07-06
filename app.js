@@ -46,6 +46,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    localhost_url:"http://30.77.54.33:8080"
   }
 })

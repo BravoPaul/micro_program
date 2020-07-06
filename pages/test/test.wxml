@@ -1,0 +1,49 @@
+<scroll-view scroll-y="true" bindscroll="scroll" scroll-top="{{scrollTop}}" bindscrolltolower="getMore" >
+  ...页面的内容
+  <text>sdfasdfsaf</text>
+  <text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+  <text>sdfasdfsaf</text>
+  <text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+  <text style="margin:0;width:auto;align-items:justify-between">sdfasdfsaf</text>
+  <text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+  <text>sdfasdfsaf</text>
+  <text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+<text>sdfasdfsaf</text>
+</scroll-view>
+
+<view class="widget-goTop" bindtap="goTop" wx:if="{{ floorstatus }}">
+  <view class="gotop-wrap" style="margin:100rpx">
+    <view class="icon icon-top"></view> <view>顶部</view>
+  </view>
+</view>

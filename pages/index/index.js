@@ -1,61 +1,56 @@
 //index.js
 //获取应用实例
 const app = getApp()
-//
-// Page({
-//   data: {
-//     motto: '小眼睛是个笨蛋',
-//     time: (new Date()).toString(),
-//     userInfo: {},
-//     hasUserInfo: false,
-//     canIUse: wx.canIUse('button.open-type.getUserInfo')
-//   },
-//   //事件处理函数
-//   bindViewTap: function() {
-//     wx.navigateTo({
-//       url: '../logs/logs'
-//     })
-//   },
-//   onLoad: function () {
-//     if (app.globalData.userInfo) {
-//       this.setData({
-//         userInfo: app.globalData.userInfo,
-//         hasUserInfo: true
-//       })
-//     } else if (this.data.canIUse){
-//       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-//       // 所以此处加入 callback 以防止这种情况
-//       app.userInfoReadyCallback = res => {
-//         this.setData({
-//           userInfo: res.userInfo,
-//           hasUserInfo: true
-//         })
-//       }
-//     } else {
-//       // 在没有 open-type=getUserInfo 版本的兼容处理
-//       wx.getUserInfo({
-//         success: res => {
-//           app.globalData.userInfo = res.userInfo
-//           this.setData({
-//             userInfo: res.userInfo,
-//             hasUserInfo: true
-//           })
-//         }
-//       })
-//     }
-//   },
-//   getUserInfo: function(e) {
-//     console.log(e)
-//     app.globalData.userInfo = e.detail.userInfo
-//     this.setData({
-//       userInfo: e.detail.userInfo,
-//       hasUserInfo: true
-//     })
-//   }
-// })
+
 
 Page({
     data: {
+        StatusBar: app.globalData.StatusBar,
+        CustomBar: app.globalData.CustomBar,
+        iconList: [
+            {
+                icon: 'explorefill',
+                color: 'red',
+                badge: 120,
+                name: '找大学'
+            }, {
+                icon: 'selection',
+                color: 'orange',
+                badge: 1,
+                name: '查专业'
+            }, {
+                icon: 'rank',
+                color: 'cyan',
+                badge: 0,
+                name: '看排名'
+
+            },
+
+            {
+                icon: 'news',
+                color: 'yellow',
+                badge: 0,
+                name: '最新动态'
+            },
+
+            
+            {
+                icon: 'message',
+                color: 'blue',
+                badge: 0,
+                name: '专家一对一'
+            },
+            {
+                icon: 'friendfill',
+                color: 'olive',
+                badge: 22,
+                name: '学生社区'
+            }
+        ],
+        gridCol: 3,
+        skin: false,
+
+
         cardCur: 0,
         swiperList: [{
             id: 0,
@@ -170,8 +165,15 @@ Page({
         console.log('圆形图片好了')
     },
 
+    go_test_page(){
+        wx.navigateTo({
+            url: '/pages/test/test',
+        })
+    },
+
+
     handlePushAbout2() {
-        
+
         console.log('圆形图片好了')
     }
 
