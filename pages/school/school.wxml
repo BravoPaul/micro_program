@@ -32,9 +32,12 @@
                 <view class="cu-item" wx:for="{{currentSch.content}}" id="{{item.sch_id}}" bind:tap="schClick">
                     <view class="cu-avatar round lg" style="background-image:url({{item.sch_logo}});"></view>
                     <view class="content" style="margin:0;width:auto;align-items:justify-between">
-                        <view class="text-grey" style="margin:0;width:auto">{{item.sch_name}}</view>
-                        <view class="text-gray text-sm" style="margin:0;width:auto">
+                        <view class="text-grey" style="margin:0;width:auto">
+                            {{item.sch_name}}
+                        </view>
+                        <view class="text-gray text-sm" style="margin:0;width:auto;align-items:justify-between">
                             {{item.sch_tags_1}}
+                            <text class="cuIcon-locationfill margin-lr-xs">{{item.location}}</text>
                         </view>
                         <view class="text-gray text-sm" style="margin:0;width:auto">
                             {{item.sch_tags_2}}

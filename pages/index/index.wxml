@@ -8,7 +8,8 @@
 <cu-custom bgColor="bg-gradual-pink" isBack="False">
     <view slot="content">雷锋帮帮我</view>
 </cu-custom>
-<view class="cu-bar bg-white">
+
+<!-- <view class="cu-bar bg-white">
     <view class="action">
         <text class="cuIcon-title text-blue"></text>
         我知道你会来，所以我等
@@ -19,7 +20,7 @@
         <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
         <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
     </swiper-item>
-</swiper>
+</swiper> -->
 <!-- <view>
     <view class="cu-bar bg-white flex solid-bottom padding justify-between">
         <view class="flex justify-center" style="flex-direction: column;">
@@ -36,7 +37,7 @@
         </view>
     </view>
 </view> -->
-<view class="cu-bar bg-white solid-bottom margin-top">
+<view class="cu-bar bg-white solid-bottom">
     <view class="solid-bottom text-xl padding">
         <text class="text-black text-bold">高考信息查询</text>
     </view>
@@ -52,7 +53,7 @@
         <text>{{item.name}}</text>
     </view>
 </view>
-<view class="cu-bar bg-white solid-bottom margin-top">
+<view class="cu-bar bg-white solid-bottom">
     <view class="solid-bottom text-xl padding">
         <text class="text-black text-bold">高考智能志愿填报</text>
     </view>
@@ -78,7 +79,7 @@
 <view class="cu-form-group">
     <input placeholder="请输入高考分数"></input>
 </view>
-<view class="cu-bar bg-white solid-bottom margin-top">
+<view class="cu-bar bg-white solid-bottom">
     <view class="padding flex flex-direction" style="width:100%">
         <button class="cu-btn bg-red margin-tb-sm lg">智能填报</button>
     </view>

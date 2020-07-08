@@ -1,0 +1,29 @@
+.des {
+    margin-left: 50rpx;
+    margin-top: 30rpx;
+    width: 650rpx;
+    font-size: 26rpx;
+    color: #484848;
+  }
+  
+  .des-short {
+    margin-left: 50rpx;
+    margin-top: 30rpx;
+    width: 650rpx;
+    font-size: 26rpx;
+    color: #484848;
+  
+    display: -webkit-box;            /* 定义为自适应布局 */
+    word-break: break-all;           /* 换行模式 */
+    text-overflow: ellipsis;         /* 超出文字用省略号代替 */
+    overflow: hidden;                /* 多出部分隐藏 */
+    -webkit-box-orient: vertical;    /* 竖直方向的超出和隐藏 */
+    -webkit-line-clamp: 4;           /* 设定行数为4 */ 
+  }
+  
+  .btn {
+    margin-top: 10rpx;
+    margin-left: 50rpx;
+    color: lightseagreen;
+    font-size: 26rpx;
+  }

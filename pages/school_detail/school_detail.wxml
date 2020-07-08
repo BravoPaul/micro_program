@@ -1,5 +1,165 @@
-<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+<cu-custom bgColor="bg-gradual-pink" style="margin-bottom:0rpx" isBack="{{true}}">
     <view slot="backText">返回</view>
     <view slot="content">院校详情</view>
 </cu-custom>
-
+<view class="cu-card case no-card bg-white padding radius text-center light">
+    <view class="cu-item shadow-warp">
+        <view class="cu-list menu-avatar">
+            <view class="cu-item">
+                <view class="cu-avatar round lg" style="background-image:url({{sch_info.sch_meta.sch_logo}});"></view>
+                <view class="content flex-sub">
+                    <view class="margin">
+                        <text class="text-xxl text-bold">{{sch_info.sch_meta.sch_name}}</text>
+                    </view>
+                    <view class="text-sm margin flex">
+                        <view class="cu-tag" wx:for="{{sch_info.sch_meta.sch_tags_1}}">
+                            {{item}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="cu-list grid col-3 row-2 no-border">
+            <view class="cuIcon-location" wx:for="{{sch_info.sch_meta.sch_tags_2}}">{{item}}</view>
+        </view>
+    </view>
+</view>
+<scroll-view scroll-x class="bg-white nav" style="margin-bottom:5rpx">
+    <view class="flex text-center">
+        <view class="cu-item flex-sub {{currentCur=='info'?'text-green cur':''}}" bindtap="tabSelect" id="info">
+            学校介绍
+        </view>
+        <view class="cu-item flex-sub {{currentCur=='score'?'text-green cur':''}}" bindtap="tabSelect" id="score">
+            招录数据
+        </view>
+    </view>
+</scroll-view>
+<view class="info_container" hidden="{{info_container_hidden}}">
+    <view class="cu-card case no-card bg-white padding">
+        <view class="solids-bottom padding-xs flex ">
+            <view class="flex-sub">
+                <view class="cu-bar bg-white">
+                    <view class="action">
+                        <text class="cuIcon-titles text-green"></text>
+                        <text class="text-xl text-bold">学校介绍</text>
+                    </view>
+                    <text class="cuIcon-{{sch_info.sch_intro.useFullNow?'fold':'unfold'}} text-green" id="sch_intro" bind:tap="toggle">
+                        {{sch_info.sch_intro.useFullNow?'收起':'展开'}}
+                    </text>
+                </view>
+                <view class="padding">
+                    <text class="text-l">
+                        {{sch_info.sch_intro.useFullNow?sch_info.sch_intro.content_full:sch_info.sch_intro.content_simple}}
+                    </text>
+                </view>
+            </view>
+        </view>
+        <view class="solids-bottom padding-xs flex ">
+            <view class="flex-sub">
+                <view class="cu-bar bg-white">
+                    <view class="action">
+                        <text class="cuIcon-titles text-green"></text>
+                        <text class="text-xl text-bold">学校排名</text>
+                    </view>
+                </view>
+                <view class="padding">
+                    <view class="cu-list grid no-border col-3 row-1">
+                        <view class="cu-item">
+                            <text>榜单名称</text>
+                        </view>
+                        <view class="cu-item">
+                            <text>年份</text>
+                        </view>
+                        <view class="cu-item">
+                            <text>排名</text>
+                        </view>
+                    </view>
+                    <view class="cu-list grid no-border col-3" wx:for="{{sch_info.sch_rank}}">
+                        <view class="cu-item">
+                            <text>{{item.name}}</text>
+                        </view>
+                        <view class="cu-item">
+                            <text>{{item.year}}</text>
+                        </view>
+                        <view class="cu-item">
+                            <text>{{item.num}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="solids-bottom padding-xs flex ">
+            <view class="flex-sub">
+                <view class="cu-bar bg-white">
+                    <view class="action">
+                        <text class="cuIcon-titles text-green"></text>
+                        <text class="text-xl text-bold">联系方式</text>
+                    </view>
+                </view>
+                <view class="padding">
+                    <view class="content">
+                        <text class="text-l">电话：</text>
+                        <text class="text-blue text-l">{{sch_info.sch_contact.tel}}</text>
+                    </view>
+                    <view class="content">
+                        <text class="text-l">官网地址：</text>
+                        <text class="text-blue text-l">{{sch_info.sch_contact.net}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="solids-bottom padding-xs flex ">
+            <view class="flex-sub">
+                <view class="cu-bar bg-white">
+                    <view class="action">
+                        <text class="cuIcon-titles text-green"></text>
+                        <text class="text-xl text-bold">奖学金介绍</text>
+                    </view>
+                    <text class="cuIcon-{{sch_info.sch_scholarship.useFullNow?'fold':'unfold'}} text-green" id="sch_scholarship" bind:tap="toggle">
+                        {{sch_info.sch_scholarship.useFullNow?'收起':'展开'}}
+                    </text>
+                </view>
+                <view class="padding">
+                    <text class="text-l">
+                        {{sch_info.sch_scholarship.useFullNow?sch_info.sch_scholarship.content_full:sch_info.sch_scholarship.content_simple}}
+                    </text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="info_container" hidden="{{!info_container_hidden}}">
+    <view class="cu-bar bg-white">
+        <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}" bindscrolltolower="scrollbot">
+            <view class="solids-bottom padding-xs flex ">
+                <view class="flex-sub">
+                    <view>
+                        <text class="cuIcon-titles text-green"></text>
+                        <text class="text-xl text-bold">历年录取分数线</text>
+                    </view>
+                    <view class="container" bindtap="close">
+                        <view class="select-wrap">
+                            <select class="selectBox" defaultOption="{{score.wenli_defaut}}" options="{{score.wenli}}" key="wenli_id" text="wenli_name" bind:change="change_score_wenli"></select>
+                        </view>
+                    </view>
+                    <view style='padding : 10rpx;'>
+                        <etable config="{{score.yearScore}}"></etable>
+                    </view>
+                    <view class="container" bindtap="close">
+                        <view>
+                            <text class="cuIcon-titles text-green"></text>
+                            <text class="text-xl text-bold">专业录取分数线</text>
+                        </view>
+                        <view class="select-wrap">
+                            <select class="selectBox" defaultOption="{{score.year_major_defaut}}" options="{{score.year_major}}" key="wenli_id" text="wenli_name" bind:change="change_major_year"></select>
+                            <select class="selectBox" defaultOption="{{score.wenli_major_defaut}}" options="{{score.wenli_major}}" key="wenli_id" text="wenli_name" bind:change="change_major_wenli"></select>
+                        </view>
+                    </view>
+                    <view style='padding : 10rpx;'>
+                        <etable config="{{score.majorScore}}"></etable>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>

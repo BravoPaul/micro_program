@@ -1,49 +1,25 @@
-<scroll-view scroll-y="true" bindscroll="scroll" scroll-top="{{scrollTop}}" bindscrolltolower="getMore" >
-  ...页面的内容
-  <text>sdfasdfsaf</text>
-  <text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-  <text>sdfasdfsaf</text>
-  <text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-  <text style="margin:0;width:auto;align-items:justify-between">sdfasdfsaf</text>
-  <text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-  <text>sdfasdfsaf</text>
-  <text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-<text>sdfasdfsaf</text>
-</scroll-view>
+<cu-custom bgColor="bg-gradual-pink" style="margin-bottom:0rpx" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">院校详情</view>
+</cu-custom>
 
-<view class="widget-goTop" bindtap="goTop" wx:if="{{ floorstatus }}">
-  <view class="gotop-wrap" style="margin:100rpx">
-    <view class="icon icon-top"></view> <view>顶部</view>
+<view class='container'>
+
+  <!-- 例：少于三行 -->
+  <view class='{{showTotal1 ? "des" : "des-short1 des-short"}}' style='-webkit-line-clamp: {{lineNum1}};'>
+    <text>{{text1}}</text>
   </view>
+  <view wx:if="{{showTotalBtn1}}" class='btn'>显示全部</view>
+
+  <!-- 例：等于三行，但不超过三行 -->
+  <view class='{{showTotal2 ? "des" : "des-short2 des-short"}}' style='-webkit-line-clamp: {{lineNum2}};'>
+    <text>{{text2}}</text>
+  </view>
+  <view wx:if="{{showTotalBtn2}}" class='btn'>显示全部</view>
+
+  <!-- 例：超过三行 -->
+  <view class='{{showTotal3 ? "des" : "des-short3 des-short"}}' style='-webkit-line-clamp: {{lineNum3}};'>
+    <text>{{text3}}</text>
+  </view>
+  <view wx:if="{{showTotalBtn3}}" class='btn' bindtap='showAll'>显示全部</view>
 </view>

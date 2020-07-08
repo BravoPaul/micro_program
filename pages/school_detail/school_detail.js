@@ -2,54 +2,10 @@ const app = getApp()
 Page(
     {
         data: {
-            school: {
-                meta: {},
-                sch_id: '',
-                post_date: '2019-01-10',
-                intro: [
-                    {
-                        name: 'h3',
-                        attrs: {
-                            class: 'p_class'
-                        },
-                        children: [{
-                            type: 'text',
-                            text: '基础信息'
-                        }]
-                    },
-                ],
-                detail: [],
-                winWidth: 0,
-                winHeight: 0,
-                currentTab: 0,
-                rank: [
-                    {
-                        name: 'h3',
-                        attrs: {
-                            class: 'p_class'
-                        },
-                        children: [{
-                            type: 'text',
-                            text: '学校排名'
-                        }]
-                    },
-                ],
-                people: [
-                    {
-                        name: 'h3',
-                        attrs: {
-                            class: 'p_class'
-                        },
-                        children: [{
-                            type: 'text',
-                            text: '知名校友'
-                        }]
-                    },
-                ],
-                views: 1000,
-                votes: 100
-            },
-
+            sch_info: {},
+            sch_score: {},
+            currentCur: 'info',
+            info_container_hidden: false,
             score: {
                 wenli: [{
                     wenli_id: '2',
@@ -153,10 +109,10 @@ Page(
             var sch_id = JSON.parse(options.sch_id);
             this.data.sch_id = sch_id
 
-            console.log('正在获取sch_id',sch_id)
+            console.log('正在获取sch_id', sch_id)
 
             wx.request({
-                url: app.globalData.localhost_url+'/gaokao/detail',
+                url: app.globalData.localhost_url + '/gaokao/detail',
                 method: 'POST',
                 data: {
                     'sch_id': sch_id,
@@ -166,79 +122,52 @@ Page(
                 },
                 success: res => {
                     console.log(res.data)
-                    let that = this
-                    let result_detail = []
-                    let result_intro = []
-                    let result_meta = {}
-                    let result_rank = this.data.school.rank
-                    let result_people = this.data.school.people
-                    let result_meta_detail = []
-                    let result_score_wenke = []
-                    let result_score_like = []
                     if (res.statusCode == 200) { //服务端处理正常，登录成功
-                        let result_list = res.data
-                        console.log(result_list)
-                        result_list.forEach(function (value) {
+                        let that = this
+                        let result_tmp = {}
+                        result_tmp['sch_meta'] = {}
+                        result_tmp['sch_intro'] = {}
+                        result_tmp['sch_contact'] = {}
+                        result_tmp['sch_rank'] = []
+                        result_tmp['sch_famous'] = []
+                        result_tmp['sch_scholarship'] = {}
+                        result_tmp['famous_people'] = []
+                        let result_score_wenke = []
+                        let result_score_like = []
+                        res.data.forEach(function (value) {
                             if (value.model === 'gaokao.schooldetail') {
-                                let value_field = value.fields
-                                result_detail = sch_detail_traitor(value_field, result_detail, 'sch_intro', '学校介绍')
-                                result_detail = sch_detail_traitor(value_field, result_detail, 'sch_scholarship', '奖学金介绍')
-                                result_detail = sch_detail_traitor(value_field, result_detail, 'sch_fellowship', '助学金介绍')
-                                result_detail = sch_detail_traitor(value_field, result_detail, 'canteen_desc', '食堂介绍')
-                                result_detail = sch_detail_traitor(value_field, result_detail, 'stu_dorm_desc', '住宿介绍')
-                                result_meta_detail = sch_intro_traitor(value_field, result_meta_detail, 'sch_tel_num', '电话')
-                                result_meta_detail = sch_intro_traitor(value_field, result_meta_detail, 'sch_web_url', '地址')
+                                result_tmp['sch_intro']['content_simple'] = value['fields']['sch_intro'].slice(0, 100) + '...'
+                                result_tmp['sch_intro']['content_full'] = value['fields']['sch_intro']
+                                result_tmp['sch_intro']['useFullNow'] = false
+
+                                // 联系方式
+                                result_tmp['sch_contact']['tel'] = value['fields']['sch_tel_num']
+                                result_tmp['sch_contact']['net'] = value['fields']['sch_web_url']
+
+                                //奖助学金
+                                result_tmp['sch_scholarship']['content_simple'] = (value['fields']['sch_scholarship'] + value['fields']['sch_fellowship']).slice(0, 100) + '...'
+                                result_tmp['sch_scholarship']['content_full'] = (value['fields']['sch_scholarship'] + value['fields']['sch_fellowship'])
+                                result_tmp['sch_scholarship']['useFullNow'] = false
+
                             }
                             else if (value.model === 'gaokao.school') {
-                                let value_field = value.fields
-
-                                let title = [{
-                                    name: 'h3',
-                                    attrs: {
-                                        class: 'p_class'
-                                    },
-                                    children: [{
-                                        type: 'text',
-                                        text: value_field['sch_name']
-                                    }]
-                                }]
-
-                                let logo = [{
-                                    name: 'p',
-                                    attrs: {
-                                        class: 'p_class'
-                                    },
-                                    children: [{
-                                        type: 'node',
-                                        name: 'img',
-                                        attrs: {
-                                            class: 'img_class',
-                                            src: value_field['sch_logo']
-                                        }
-                                    }]
-                                }]
-                                let tags = value_field['sch_tags'].replace(/[']+/g, "")
-                                tags = tags.replace("[", "")
-                                tags = tags.replace("]", "")
-                                result_meta['tag'] = tags
-                                result_meta['logo'] = logo
-                                result_meta['title'] = title
-                                result_intro = sch_intro_traitor(value_field, result_intro, 'sch_english_name', '英文名')
-                                result_intro = sch_intro_traitor(value_field, result_intro, 'location', '地点')
-                                result_intro = sch_intro_traitor(value_field, result_intro, 'sch_create_time', '成立时间')
-                                result_intro = sch_intro_traitor(value_field, result_intro, 'sch_competent_desc', '直属机构')
-                                result_intro = sch_intro_traitor(value_field, result_intro, 'diploma_desc', '招生类型')
-                                result_intro = sch_intro_traitor(value_field, result_intro, 'sch_run_type_desc', '学校属性')
-                                // result_intro = sch_intro_traitor(value_field, result_intro, 'sch_tags', '学校标签')
-
+                                let result_rank_tmp = {}
+                                result_rank_tmp['sch_logo'] = value['fields']['sch_logo']
+                                result_rank_tmp['sch_name'] = value['fields']['sch_name']
+                                result_rank_tmp['sch_tags_1'] = tag_traitor(value['fields']['sch_tags'])[0]
+                                result_rank_tmp['sch_tags_2'] = tag_traitor(value['fields']['sch_tags'])[1].concat(value['fields']['province'])
+                                result_tmp['meta'] = result_rank_tmp
                             }
                             else if (value.model === 'gaokao.schoolrank') {
-                                let value_field = value.fields
-                                result_rank = sch_rank_traitor(value_field, result_rank)
+                                let result_rank_tmp = {}
+                                result_rank_tmp['name'] = value['fields']['rank_type_desc']
+                                result_rank_tmp['num'] = value['fields']['rank_idx']
+                                result_rank_tmp['year'] = value['fields']['rank_year']
+                                result_tmp['sch_rank'] = result_tmp['sch_rank'].concat(result_rank_tmp)
                             }
                             else if (value.model === 'gaokao.schoolfamous') {
-                                let value_field = value.fields
-                                result_people = sch_people_traitor(value_field, result_people)
+                                let people = value['fields']['celebrity_name'] + '：' + value['fields']['celebrity_desc']
+                                result_tmp['famous_people'] = result_tmp['famous_people'].concat(people)
                             }
                             else if (value.model === 'gaokao.schoolscore') {
                                 let value_field = value.fields
@@ -252,25 +181,58 @@ Page(
                                 that.data.score.major_content[index_wenli][index_year] = sch_major_traitor(value_field, that.data.score.major_content[index_wenli][index_year])
                             }
                         });
-                        result_intro = result_intro.concat(result_meta_detail)
                         that.setData({
-                            'school.detail': that.data.school.detail.concat(result_detail),
-                            'school.intro': that.data.school.intro.concat(result_intro),
-                            'school.rank': result_rank,
-                            'school.people': result_people,
-                            'school.meta': result_meta,
+                            'sch_info.sch_intro': result_tmp['sch_intro'],
+                            'sch_info.sch_rank': result_tmp['sch_rank'],
+                            'sch_info.sch_contact': result_tmp['sch_contact'],
+                            'sch_info.sch_scholarship': result_tmp['sch_scholarship'],
+                            'sch_info.famous_people': result_tmp['famous_people'],
+                            'sch_info.sch_meta': result_tmp['meta'],
                             'score.yearScore_wenke_content': result_score_wenke,
                             'score.yearScore_like_content': result_score_like,
                             'score.yearScore.content': result_score_wenke,
                             'score.majorScore.content': that.data.score.major_content['wenli_1']['year_2019'],
+
                         })
+                        console.log(result_tmp['sch_rank'])
                     }
                 },
             })
 
         },
+        toggle(e) {
+            console.log(e)
+            let id = e.currentTarget.id
+            if (id === 'sch_intro') {
+                this.setData({
+                    'sch_info.sch_intro.useFullNow': !this.data.sch_info['sch_intro'].useFullNow
+                })
+            }
+
+            if (id === 'sch_scholarship') {
+                this.setData({
+                    'sch_info.sch_scholarship.useFullNow': !this.data.sch_info['sch_scholarship'].useFullNow
+                })
+            }
 
 
+            console.log(this.data.sch_info['sch_intro'].useFullNow)
+
+        },
+        tabSelect(e) {
+            console.log(e)
+            let info_container_hidden = true
+            if (e.currentTarget.id == 'info') {
+                info_container_hidden = false
+            }
+            else {
+                info_container_hidden = true
+            }
+            this.setData({
+                'currentCur': e.currentTarget.id,
+                'info_container_hidden': info_container_hidden
+            })
+        },
         change_score_wenli: function (e) {
             // let tmp = this.score.yearScore.content
             this.setData({
@@ -313,174 +275,26 @@ Page(
             })
 
         },
+    });
+function tag_traitor(tags_o) {
+    let tags = tags_o.replace(/[']+/g, "")
+    tags = tags.replace(/\s+/g, "")
+    tags = tags.replace("[", "")
+    tags = tags.replace("]", "")
+    var result_tag_1 = []
+    var result_tag_2 = []
+    let tag_list = tags.split(',')
+    let first_stage = ['985', '211', '双一流']
 
-        close() {
-            // 关闭select
-            this.selectComponent('#select').close()
-        },
-
-        swiperchange: function (e) {
-            let that = this
-            that.setData({
-                'currentTab': e.detail.current
-            })
-        },
-
-        bindChange: function (e) {
-            let that = this;
-            that.setData({ currentTab: e.detail.current });
-        },
-        swichNav: function (e) {
-
-            let that = this;
-
-            if (this.data.currentTab === e.target.dataset.current) {
-                return false;
-            } else {
-                that.setData({
-                    currentTab: e.target.dataset.current
-                })
-            }
-        },
-
-        /* =======加减页面操作========*/
-        /* 点击减号 */
-        bindMinus: function () {
-            var page = this.data.page;
-            // 如果大于1时，才可以减  
-            if (page > 1) {
-                page--;
-            }
-            // 只有大于0的时候，才能normal状态，否则disable状态  
-            var minusStatus = page <= 1 ? 'disabled' : 'normal';
-            // 将数值与状态写回  
-            this.setData({
-                page: page,
-                minusStatus: minusStatus
-            });
-        },
-        /* 点击加号 */
-        bindPlus: function () {
-            var page = this.data.page;
-            // 不作过多考虑自增1  
-            page++;
-            // 只有大于一件的时候，才能normal状态，否则disable状态  
-            var minusStatus = page < 1 ? 'disabled' : 'normal';
-            // 将数值与状态写回  
-            this.setData({
-                page: page,
-                minusStatus: minusStatus
-            });
-        },
-        /* 输入框事件 */
-        bindManual: function (e) {
-            var page = e.detail.value;
-            // 将数值与状态写回  
-            this.setData({
-                page: page
-            });
-        },
-
-        bindShowMsg() {
-            this.setData({ select: !this.data.select })
-        },
-        mySelect(e) {
-            var name = e.currentTarget.dataset.name
-            this.setData({ tihuoWay: name, select: false })
-        },
-
-
-    },
-)
-// 获取详情页所有数据
-function sch_detail_traitor(value, result, field, showname) {
-    if (value[field] !== '') {
-        let tmp_key = {
-            name: 'h3',
-            attrs: {
-                class: 'p_class'
-            },
-            children: [{
-                type: 'text',
-                text: showname
-            }]
+    for (let i = 0; i < tag_list.length; i++) {
+        if (first_stage.indexOf(tag_list[i]) >= 0) {
+            result_tag_1 = result_tag_1.concat(tag_list[i])
         }
-        result = result.concat(tmp_key)
-
-        let tmp_value = {
-            name: 'p',
-            attrs: {
-                class: 'h3_class',
-            },
-            children: [{
-                type: 'text',
-                text: value[field]
-            }]
-        }
-        result = result.concat(tmp_value)
-    }
-    return result
-}
-
-function sch_intro_traitor(value, result, field, showname) {
-    if (value[field] !== '') {
-        let tags = ''
-        if (field === 'sch_tags') {
-            tags = value[field].replace(/[']+/g, "")
-            tags = tags.replace("[", "")
-            tags = tags.replace("]", "")
-        } else {
-            tags = value[field]
-        }
-        let tmp_value = {
-            name: 'p',
-            attrs: {
-                class: 'h3_class',
-            },
-            children: [{
-                type: 'text',
-                text: showname + ' : ' + tags
-            }]
-        }
-        result = result.concat(tmp_value)
-    }
-    return result
-}
-
-function sch_rank_traitor(value, result) {
-    if (value !== '') {
-        if (value['rank_year'] === 2019) {
-            let tmp_value = {
-                name: 'p',
-                attrs: {
-                    class: 'h3_class',
-                },
-                children: [{
-                    type: 'text',
-                    text: value['rank_type_desc'] + ' : ' + '国内第' + value['rank_idx'] + '名'
-                }]
-            }
-            result = result.concat(tmp_value)
+        else {
+            result_tag_2 = result_tag_2.concat(tag_list[i])
         }
     }
-    return result
-}
-
-function sch_people_traitor(value, result) {
-    if (value !== '') {
-        let tmp_value = {
-            name: 'p',
-            attrs: {
-                class: 'h3_class',
-            },
-            children: [{
-                type: 'text',
-                text: value['celebrity_name'] + ' ，' + value['celebrity_desc']
-            }]
-        }
-        result = result.concat(tmp_value)
-    }
-    return result
+    return [result_tag_1, result_tag_2]
 }
 
 function sch_score_traitor(value, result, wenli) {
