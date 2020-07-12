@@ -48,9 +48,9 @@
                     </text>
                 </view>
                 <view class="padding">
-                    <text class="text-l">
+                    <button class="text-l">
                         {{sch_info.sch_intro.useFullNow?sch_info.sch_intro.content_full:sch_info.sch_intro.content_simple}}
-                    </text>
+                    </button>
                 </view>
             </view>
         </view>

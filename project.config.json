@@ -66,9 +66,9 @@
 			"current": -1,
 			"list": [
 				{
-					"id": -1,
-					"name": "pages/detail",
-					"pathName": "pages/school_detail/school_detail",
+					"id": 0,
+					"name": "pages/recommend",
+					"pathName": "pages/recommend/recommend",
 					"query": "",
 					"scene": null
 				},
@@ -76,6 +76,7 @@
 					"id": -1,
 					"name": "pages/index/index",
 					"pathName": "pages/index/index",
+					"query": "",
 					"scene": null
 				}
 			]

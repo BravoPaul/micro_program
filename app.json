@@ -4,7 +4,7 @@
     "pages/logs/logs",
     "pages/school/school",
     "pages/school_detail/school_detail",
-    "pages/test/test"
+    "pages/recommend/recommend"
   ],
   "window": {
     "navigationStyle": "custom"

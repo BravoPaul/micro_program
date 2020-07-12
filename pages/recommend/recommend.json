@@ -1,0 +1,6 @@
+{
+    "usingComponents": {},
+    "backgroundColor": "#f0145a",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": true
+  }
