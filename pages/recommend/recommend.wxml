@@ -1,3 +1,31 @@
+<wxs module="probDeco">
+      module.exports = {
+        get_color: function (value) {
+            if (value<20)
+                return 'red'
+            else if(value>80)
+                return 'green'
+            else
+                return 'blue'
+        },
+        get_risk: function (value) {
+            if (value<20)
+                return '风险大'
+            else if(value>80)
+                return '风险小'
+            else
+                return '风险中'
+        },
+        get_direct: function (value) {
+            if (value<20)
+                return '冲刺'
+            else if(value>80)
+                return '保底'
+            else
+                return '稳健'
+        }
+      }
+</wxs>
 <cu-custom bgColor="bg-gradual-pink" style="margin-bottom:0rpx" isBack="{{true}}">
     <view slot="backText">返回</view>
     <view slot="content">推荐列表</view>
@@ -25,75 +53,110 @@
             </button>
         </view>
         <view>
+            <button class="cu-btn bg-white">
+                <picker bindchange="batchChange" range="{{batch}}" range-key="value">
+                    <view class="picker">
+                        <text class="cuIcon-unfold text-gray">{{current_batch.value}}</text>
+                    </view>
+                </picker>
+            </button>
+        </view>
+        <view>
             <button class="cu-btn bg-white" bindtap="showModal" data-target="DrawerModalR">
                 <text class="cuIcon-clothesfill text-gray">筛选</text>
             </button>
         </view>
     </view>
 </view>
-<view class="main_data" wx:for="{{4}}">
-    <view class="cu-card case card bg-white padding radius light">
-        <view class="cu-item" style="flex-direction: row;display:flex">
-            <view class="cu-item">
-                <view class="content">
-                    <view class="text-red ">冲刺</view>
-                    <view class="text-bold text-xxl">40%</view>
-                    <view class="text-red ">风险大</view>
+<view>
+    <scroll-view scroll-y scroll-with-animation style="height:{{scrollHeight}}px" scroll-top='{{topNum}}' bindscrolltolower="scrolltolower" bindscrolltoupper="scrolltoupper">
+        <view class="main_data" wx:for="{{rec_result.current_batch_school}}" wx:key="*this">
+            <view class="cu-card case card bg-white radius light">
+                <view class="cu-item" style="flex-direction: row;display:flex">
+                    <view class="cu-item">
+                        <view class="flex justify-center" style="flex-direction: column;display:flex">
+                            <view class="text-{{probDeco.get_color(item.probability)}}">
+                                {{probDeco.get_direct(item.probability)}}
+                            </view>
+                            <view class="text-bold text-xxl">{{item.probability}}%</view>
+                            <view class="text-{{probDeco.get_color(item.probability)}}">
+                                {{probDeco.get_risk(item.probability)}}
+                            </view>
+                        </view>
+                    </view>
+                    <view class="cu-item margin-left">
+                        <view class="cu-item flex margin-bottom align-center">
+                            <view class="cu-avatar round lg" style="background-image:url({{item.sch_logo}});"></view>
+                            <view class="content margin-left">
+                                <view class="align-center" hover-class="none" hover-stop-propagation="false">
+                                    <text class="text-bold text-xl margin-right">
+                                        {{item.sch_name}}
+                                    </text>
+                                    <text class="cuIcon-locationfill text-grey text-sm">{{item.location}}
+                                    </text>
+                                </view>
+                                <!-- <view> -->
+                                <!-- <text class="cuIcon-locationfill text-grey text-sm" value="">{{item.location}}</text> -->
+                                <!-- </view> -->
+                                <view>
+                                    <text class="text-grey text-sm">{{item.sch_first_tags}}</text>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="cu-item flex align-left">
+                            <view class="cotent margin-left">
+                                <view class="text-gray text">
+                                    2019年录取人数：{{item.admission_count}}
+                                </view>
+                                <view class="text-gray text">2019年最低分数：{{item.min_score}}</view>
+                            </view>
+                            <view class="margin-left">
+                                <button class="cu-btn lines-gray round" bind:tap="get_major_list" id="{{index}}">
+                                    专业 {{item.major.length}}
+                                    <text class="cuIcon-{{item.major_hidden?'unfold':'fold'}}"></text>
+                                </button>
+                            </view>
+                        </view>
+                    </view>
                 </view>
             </view>
-            <view class="cu-item margin-left">
-                <view class="cu-item flex solid-bottom margin-bottom align-center">
-                    <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"></view>
-                    <view class="content margin-left">
-                        <view class="align-center" hover-class="none" hover-stop-propagation="false">
-                            <text class="text-bold text-xxl margin-right">清华大学</text>
-                            <text class="cuIcon-locationfill text-grey text-sm">北京市</text>
+            <view class="cu-card case card bg-white radius light justify-end" wx:for="{{item.major}}" wx:for-item="major" wx:key="major" hidden="{{item.major_hidden}}">
+                <view class="cu-item" style="flex-direction: row;display:flex">
+                    <view class="cu-item margin-left">
+                        <view class="content">
+                            <view class="text-{{probDeco.get_color(major.probability)}}">
+                                {{probDeco.get_direct(major.probability)}}
+                            </view>
+                            <view class="text-bold text-xxl">{{major.probability}}%</view>
+                            <view class="text-{{probDeco.get_color(major.probability)}}">
+                                {{probDeco.get_risk(major.probability)}}
+                            </view>
                         </view>
-                        <text class="text-grey text-sm">985，211，双一流</text>
                     </view>
-                </view>
-                <view class="cu-item flex align-left">
-                    <view class="cotent margin-left margin-right">
-                        <view class="text-gray text">2019年录取人数：37</view>
-                        <view class="text-gray text">2019年最低分数：700</view>
-                    </view>
-                    <view class="margin-left">
-                        <button class="cu-btn lines-gray round" bind:tap="get_major_list">
-                            专业 24
-                            <text class="cuIcon-unfold"></text>
-                        </button>
+                    <view class="cu-item">
+                        <view class="cu-item flex margin-left margin-bottom align-center">
+                            <view class="content margin-left">
+                                <view class="" hover-class="none" hover-stop-propagation="false">
+                                    <text class="text-bold text-l">
+                                        {{major.enroll_major_name}}
+                                    </text>
+                                </view>
+                                <text class="text-grey text-sm">
+                                    学制：{{major.academic_rule}}  学费：{{major.tuition}}
+                                </text>
+                            </view>
+                        </view>
+                        <view class="cu-item margin-left flex align-left">
+                            <view class="cotent margin-left margin-right">
+                                <view class="text-gray text">
+                                    2019年录取人数：{{major.admission_count}}
+                                </view>
+                                <view class="text-gray text">2019年最低分数：{{major.min_score}}</view>
+                            </view>
+                        </view>
                     </view>
                 </view>
             </view>
         </view>
-    </view>
-    <view class="cu-card case card bg-white padding radius light" hidden="{{major_hidden}}">
-        <view class="cu-item" style="flex-direction: row;display:flex">
-            <view class="cu-item">
-                <view class="content">
-                    <view class="text-red ">冲刺</view>
-                    <view class="text-bold text-xxl">40%</view>
-                    <view class="text-red ">风险大</view>
-                </view>
-            </view>
-            <view class="cu-item margin-left">
-                <view class="cu-item flex solid-bottom margin-bottom align-center">
-                    <view class="content margin-left">
-                        <view class="" hover-class="none" hover-stop-propagation="false">
-                            <text class="text-bold text-l">
-                                数学类(含数学与应用数学(数学)、数学与应用数学(概率统计)、数学与应用数学(科学与工程计算)、数学与应用数学(信息科学)、数学与应用数学(金融)、数据科学与大数据技术专业)
-                            </text>
-                        </view>
-                        <text class="text-grey text-sm">学制：4年  学费：2300</text>
-                    </view>
-                </view>
-                <view class="cu-item flex align-left">
-                    <view class="cotent margin-left margin-right">
-                        <view class="text-gray text">2019年录取人数：37</view>
-                        <view class="text-gray text">2019年最低分数：700</view>
-                    </view>
-                </view>
-            </view>
-        </view>
-    </view>
+    </scroll-view>
 </view>

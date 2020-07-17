@@ -49,19 +49,19 @@ Page({
         },
 
         recommend: {
-            region_current: '河北省',
-            region: [],
             wenli_current: 'wenli_1',
-            score: 200
+            score: 200,
+            province: app.globalData.province,
+            province_current: app.globalData.province[4]
         }
 
     },
 
     RegionChange: function (e) {
+        console.log(e)
         this.setData({
-            'recommend.region_current': e.detail.value[0]
+            'recommend.province_current': this.data.recommend.province[parseInt(e.detail.value)]
         })
-        console.log(this.data.recommend.region_current)
     },
 
     wenliSelect: function (e) {
@@ -87,11 +87,11 @@ Page({
 
     formSubmit: function (e) {
 
-        let region = JSON.stringify(this.data.recommend.region_current)
+        let province_id = JSON.stringify(this.data.recommend.province_current.key)
         let wenli = JSON.stringify(this.data.recommend.wenli_current.split('_')[1])
         let score = JSON.stringify(this.data.recommend.score)
         wx.navigateTo({
-            url: '/pages/recommend/recommend?region=' + region + '&wenli=' + wenli + '&score=' + score,
+            url: '/pages/recommend/recommend?province_id=' + province_id + '&wenli=' + wenli + '&score=' + score,
         })
     }
 })
