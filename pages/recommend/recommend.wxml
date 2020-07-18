@@ -1,25 +1,25 @@
 <wxs module="probDeco">
       module.exports = {
         get_color: function (value) {
-            if (value<20)
+            if (value<50)
                 return 'red'
-            else if(value>80)
+            else if(value>70)
                 return 'green'
             else
                 return 'blue'
         },
         get_risk: function (value) {
-            if (value<20)
+            if (value<50)
                 return '风险大'
-            else if(value>80)
+            else if(value>70)
                 return '风险小'
             else
                 return '风险中'
         },
         get_direct: function (value) {
-            if (value<20)
+            if (value<50)
                 return '冲刺'
-            else if(value>80)
+            else if(value>70)
                 return '保底'
             else
                 return '稳健'
@@ -44,12 +44,12 @@
     <view class="flex margin-left margin-right justify-between">
         <view>
             <button class="cu-btn bg-white">
-                <text class="cuIcon-locationfill text-gray">河北省</text>
+                <text class="cuIcon-locationfill text-gray">{{param['province']}}</text>
             </button>
         </view>
         <view>
             <button class="cu-btn bg-white">
-                <text class="cuIcon-hotfill text-gray">566分</text>
+                <text class="cuIcon-hotfill text-gray">{{param['score']}}</text>
             </button>
         </view>
         <view>
@@ -72,7 +72,7 @@
     <scroll-view scroll-y scroll-with-animation style="height:{{scrollHeight}}px" scroll-top='{{topNum}}' bindscrolltolower="scrolltolower" bindscrolltoupper="scrolltoupper">
         <view class="main_data" wx:for="{{rec_result.current_batch_school}}" wx:key="*this">
             <view class="cu-card case card bg-white radius light">
-                <view class="cu-item" style="flex-direction: row;display:flex">
+                <view class="cu-item" style="flex-direction: row;display:flex" id="{{item.sch_id}}" bind:tap="schClick">
                     <view class="cu-item">
                         <view class="flex justify-center" style="flex-direction: column;display:flex">
                             <view class="text-{{probDeco.get_color(item.probability)}}">

@@ -47,7 +47,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    localhost_url: "http://192.168.1.6:8080",
+    localhost_url: "http://192.168.1.2:8080",
     province: [
       { key: '11', value: '北京市' },
       { key: '43', value: '湖南省' },

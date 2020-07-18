@@ -4,6 +4,7 @@ Page({
         CustomBar: app.globalData.CustomBar,
         param: {},
         major_hidden: true,
+        province: app.globalData.province,
         current_batch: {
             key: 'batch_1',
             value: '本科第一批'
@@ -24,7 +25,7 @@ Page({
             batch_1: [],
             batch_2: [],
             batch_3: [],
-            current_batch_school:[]
+            current_batch_school: []
         },
         page_ex: 0,
         page_post: 1,
@@ -43,10 +44,13 @@ Page({
             }
         });
 
+        this.setData({
+            'param.province_id': JSON.parse(options.province_id),
+            'param.wenli': JSON.parse(options.wenli),
+            'param.score': JSON.parse(options.score),
+            'param.province': JSON.parse(options.province),
+        })
 
-        this.data.param['province_id'] = JSON.parse(options.province_id)
-        this.data.param['wenli'] = JSON.parse(options.wenli)
-        this.data.param['score'] = JSON.parse(options.score)
 
         wx.request({
             url: app.globalData.localhost_url + '/gaokao/recommend',
@@ -106,26 +110,33 @@ Page({
                         'rec_result.batch_1': result_batch_1,
                         'rec_result.batch_2': result_batch_2,
                         'rec_result.batch_3': result_batch_3,
-                        
+
                     })
 
                     that.setData({
-                        'rec_result.current_batch_school_ex':that.data.rec_result[that.data.current_batch.key].slice(0,100),
-                        'rec_result.current_batch_school':that.data.rec_result[that.data.current_batch.key].slice(0,100),
-                        'rec_result.current_batch_school_post':that.data.rec_result[that.data.current_batch.key].slice(0,30),
+                        'rec_result.current_batch_school_ex': that.data.rec_result[that.data.current_batch.key].slice(0, 100),
+                        'rec_result.current_batch_school': that.data.rec_result[that.data.current_batch.key].slice(0, 100),
+                        'rec_result.current_batch_school_post': that.data.rec_result[that.data.current_batch.key].slice(0, 30),
                     })
 
-                    
+
                 }
 
             },
         })
     },
 
+    schClick: function (e) {
+        var queryBean = JSON.stringify(e.currentTarget.id)
+        wx.navigateTo({
+            url: '/pages/school_detail/school_detail?sch_id=' + queryBean,
+        })
+    },
+
 
 
     // scrolltoupper: function () {
-        
+
     //     console.log('to up')
     //     if (this.data.page_ex>0){
     //         this.setData({
@@ -133,7 +144,7 @@ Page({
     //             'page_post':this.data.page_post-1,
     //         })
     //     }
-        
+
     //     let batch_tmp_1 =  this.data.rec_result[this.data.current_batch.key].slice(this.data.page_ex*30,this.data.page_post*30)
 
     //     if (this.data.rec_result[this.data.current_batch.key].length > this.data.page_ex*30) {
@@ -146,13 +157,13 @@ Page({
     //         //     topNum: this.data.topNum = 0
     //         // });
     //     }
-        
+
     // },
 
     // scrolltolower: function () {
 
     //     console.log('to low')
-        
+
     //     if (this.data.rec_result[this.data.current_batch.key].length > this.data.page_ex*30){
     //         this.setData({
     //             'page_ex':this.data.page_ex+1,
@@ -164,7 +175,7 @@ Page({
     //             'rec_result.current_batch_school_ex': batch_tmp_1,
     //         })
     //     }
-        
+
     // },
 
 

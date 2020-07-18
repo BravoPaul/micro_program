@@ -88,10 +88,11 @@ Page({
     formSubmit: function (e) {
 
         let province_id = JSON.stringify(this.data.recommend.province_current.key)
+        let province = JSON.stringify(this.data.recommend.province_current.value)
         let wenli = JSON.stringify(this.data.recommend.wenli_current.split('_')[1])
         let score = JSON.stringify(this.data.recommend.score)
         wx.navigateTo({
-            url: '/pages/recommend/recommend?province_id=' + province_id + '&wenli=' + wenli + '&score=' + score,
+            url: '/pages/recommend/recommend?province_id=' + province_id + '&wenli=' + wenli + '&score=' + score+'&province=' + province,
         })
     }
 })
