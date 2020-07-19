@@ -70,88 +70,91 @@
 </view>
 <view>
     <scroll-view scroll-y scroll-with-animation style="height:{{scrollHeight}}px" scroll-top='{{topNum}}' bindscrolltolower="scrolltolower" bindscrolltoupper="scrolltoupper">
-        <view class="main_data" wx:for="{{rec_result.current_batch_school}}" wx:key="*this">
-            <view class="cu-card case card bg-white radius light">
-                <view class="cu-item" style="flex-direction: row;display:flex" id="{{item.sch_id}}" bind:tap="schClick">
-                    <view class="cu-item">
-                        <view class="flex justify-center" style="flex-direction: column;display:flex">
-                            <view class="text-{{probDeco.get_color(item.probability)}}">
-                                {{probDeco.get_direct(item.probability)}}
-                            </view>
-                            <view class="text-bold text-xxl">{{item.probability}}%</view>
-                            <view class="text-{{probDeco.get_color(item.probability)}}">
-                                {{probDeco.get_risk(item.probability)}}
-                            </view>
-                        </view>
-                    </view>
-                    <view class="cu-item margin-left">
-                        <view class="cu-item flex margin-bottom align-center">
-                            <view class="cu-avatar round lg" style="background-image:url({{item.sch_logo}});"></view>
-                            <view class="content margin-left">
-                                <view class="align-center" hover-class="none" hover-stop-propagation="false">
-                                    <text class="text-bold text-xl margin-right">
-                                        {{item.sch_name}}
-                                    </text>
-                                    <text class="cuIcon-locationfill text-grey text-sm">{{item.location}}
-                                    </text>
+        <view wx:for="{{rec_result.current_batch_school}}" wx:for-item="arr_item" wx:for-index="arr_index" wx:key="arr_index">
+            <view class="main_data" wx:for="{{arr_item}}" wx:key="index">
+                <view class="cu-card case card bg-white radius light">
+                    <view class="cu-item" style="flex-direction: row;display:flex" id="{{item.sch_id}}" bind:tap="schClick">
+                        <view class="cu-item">
+                            <view class="flex justify-center" style="flex-direction: column;display:flex">
+                                <view class="text-{{probDeco.get_color(item.probability)}}">
+                                    {{probDeco.get_direct(item.probability)}}
                                 </view>
-                                <!-- <view> -->
-                                <!-- <text class="cuIcon-locationfill text-grey text-sm" value="">{{item.location}}</text> -->
-                                <!-- </view> -->
-                                <view>
-                                    <text class="text-grey text-sm">{{item.sch_first_tags}}</text>
+                                <view class="text-bold text-xxl">{{item.probability}}%</view>
+                                <view class="text-{{probDeco.get_color(item.probability)}}">
+                                    {{probDeco.get_risk(item.probability)}}
                                 </view>
                             </view>
                         </view>
-                        <view class="cu-item flex align-left">
-                            <view class="cotent margin-left">
-                                <view class="text-gray text">
-                                    2019年录取人数：{{item.admission_count}}
+                        <view class="cu-item margin-left">
+                            <view class="cu-item flex margin-bottom align-center">
+                                <view class="cu-avatar round lg" style="background-image:url({{item.sch_logo}});"></view>
+                                <view class="content margin-left">
+                                    <view class="align-center" hover-class="none" hover-stop-propagation="false">
+                                        <text class="text-bold text-xl margin-right">
+                                            {{item.sch_name}}
+                                        </text>
+                                        <view class="text-grey text-sm margin-right">
+                                            <text class="cuIcon-locationfill text-grey text-sm"></text>
+                                            {{item.location}}
+                                        </view>
+                                    </view>
+                                    <view class="text-grey text-sm margin-right">
+                                        {{item.sch_first_tags}}
+                                    </view>
                                 </view>
-                                <view class="text-gray text">2019年最低分数：{{item.min_score}}</view>
                             </view>
-                            <view class="margin-left">
-                                <button class="cu-btn lines-gray round" bind:tap="get_major_list" id="{{index}}">
-                                    专业 {{item.major.length}}
-                                    <text class="cuIcon-{{item.major_hidden?'unfold':'fold'}}"></text>
-                                </button>
+                            <view class="cu-item flex align-left">
+                                <view class="cotent margin-left">
+                                    <view class="text-gray text">
+                                        2019年录取人数：{{item.admission_count}}
+                                    </view>
+                                    <view class="text-gray text">2019年最低分数：{{item.min_score}}</view>
+                                </view>
+                                <view class="margin-left">
+                                    <button class="cu-btn lines-gray round" catch:tap="get_major_list" id="{{arr_index}}_{{index}}">
+                                        专业 {{item.major.length}}
+                                        <text class="cuIcon-{{item.major_hidden?'unfold':'fold'}}"></text>
+                                    </button>
+                                </view>
                             </view>
                         </view>
                     </view>
                 </view>
-            </view>
-            <view class="cu-card case card bg-white radius light justify-end" wx:for="{{item.major}}" wx:for-item="major" wx:key="major" hidden="{{item.major_hidden}}">
-                <view class="cu-item" style="flex-direction: row;display:flex">
-                    <view class="cu-item margin-left">
-                        <view class="content">
-                            <view class="text-{{probDeco.get_color(major.probability)}}">
-                                {{probDeco.get_direct(major.probability)}}
-                            </view>
-                            <view class="text-bold text-xxl">{{major.probability}}%</view>
-                            <view class="text-{{probDeco.get_color(major.probability)}}">
-                                {{probDeco.get_risk(major.probability)}}
+                <view class="cu-card case card bg-white radius light justify-end"  wx:for="{{item.major}}" wx:for-item="major" wx:key="major" hidden="{{item.major_hidden}}">
+                    <view class="cu-item" style="flex-direction: row;display:flex">
+                        <view class="cu-item margin-left">
+                            <view class="content">
+                                <view class="text-{{probDeco.get_color(major.probability)}}">
+                                    {{probDeco.get_direct(major.probability)}}
+                                </view>
+                                <view class="text-bold text-xxl">{{major.probability}}%</view>
+                                <view class="text-{{probDeco.get_color(major.probability)}}">
+                                    {{probDeco.get_risk(major.probability)}}
+                                </view>
                             </view>
                         </view>
-                    </view>
-                    <view class="cu-item">
-                        <view class="cu-item flex margin-left margin-bottom align-center">
-                            <view class="content margin-left">
-                                <view class="" hover-class="none" hover-stop-propagation="false">
-                                    <text class="text-bold text-l">
-                                        {{major.enroll_major_name}}
+                        <view class="cu-item">
+                            <view class="cu-item flex margin-left margin-bottom align-center">
+                                <view class="content margin-left">
+                                    <view class="" hover-class="none" hover-stop-propagation="false">
+                                        <text class="text-bold text-l">
+                                            {{major.enroll_major_name}}
+                                        </text>
+                                    </view>
+                                    <text class="text-grey text-sm">
+                                        学制：{{major.academic_rule}}  学费：{{major.tuition}}
                                     </text>
                                 </view>
-                                <text class="text-grey text-sm">
-                                    学制：{{major.academic_rule}}  学费：{{major.tuition}}
-                                </text>
                             </view>
-                        </view>
-                        <view class="cu-item margin-left flex align-left">
-                            <view class="cotent margin-left margin-right">
-                                <view class="text-gray text">
-                                    2019年录取人数：{{major.admission_count}}
+                            <view class="cu-item margin-left flex align-left">
+                                <view class="cotent margin-left margin-right">
+                                    <view class="text-gray text">
+                                        2019年录取人数：{{major.admission_count}}
+                                    </view>
+                                    <view class="text-gray text">
+                                        2019年最低分数：{{major.min_score}}
+                                    </view>
                                 </view>
-                                <view class="text-gray text">2019年最低分数：{{major.min_score}}</view>
                             </view>
                         </view>
                     </view>

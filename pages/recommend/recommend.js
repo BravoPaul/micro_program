@@ -97,26 +97,27 @@ Page({
 
                     result_batch_1.forEach(function (value) {
                         value['major_hidden'] = true
-
                         value['sch_first_tags'] = tag_traitor(value['sch_tags'])[0]
                     });
                     result_batch_2.forEach(function (value) {
                         value['major_hidden'] = true
+                        value['sch_first_tags'] = tag_traitor(value['sch_tags'])[0]
                     });
                     result_batch_3.forEach(function (value) {
                         value['major_hidden'] = true
+                        value['sch_first_tags'] = tag_traitor(value['sch_tags'])[0]
                     });
                     that.setData({
                         'rec_result.batch_1': result_batch_1,
                         'rec_result.batch_2': result_batch_2,
                         'rec_result.batch_3': result_batch_3,
+                        'current_batch':current_batch
 
                     })
 
                     that.setData({
-                        'rec_result.current_batch_school_ex': that.data.rec_result[that.data.current_batch.key].slice(0, 100),
-                        'rec_result.current_batch_school': that.data.rec_result[that.data.current_batch.key].slice(0, 100),
-                        'rec_result.current_batch_school_post': that.data.rec_result[that.data.current_batch.key].slice(0, 30),
+                        'rec_result.current_page': 0,
+                        ['rec_result.current_batch_school[' + 0 + ']']: that.data.rec_result[that.data.current_batch.key].slice(0, 30),
                     })
 
 
@@ -134,51 +135,21 @@ Page({
     },
 
 
+    scrolltolower: function () {
 
-    // scrolltoupper: function () {
+        console.log('下拉触发')
+        let current_page = this.data.rec_result.current_page + 1
+        let index_0 = current_page * 30
+        let index_1 = (current_page * 30) * 30
 
-    //     console.log('to up')
-    //     if (this.data.page_ex>0){
-    //         this.setData({
-    //             'page_ex':this.data.page_ex-1,
-    //             'page_post':this.data.page_post-1,
-    //         })
-    //     }
-
-    //     let batch_tmp_1 =  this.data.rec_result[this.data.current_batch.key].slice(this.data.page_ex*30,this.data.page_post*30)
-
-    //     if (this.data.rec_result[this.data.current_batch.key].length > this.data.page_ex*30) {
-    //         this.setData({
-    //             'rec_result.current_batch_school': batch_tmp_1.concat(this.data.rec_result.current_batch_school_post),
-    //             'rec_result.current_batch_school_post': batch_tmp_1,
-    //         })
-
-    //         // this.setData({
-    //         //     topNum: this.data.topNum = 0
-    //         // });
-    //     }
-
-    // },
-
-    // scrolltolower: function () {
-
-    //     console.log('to low')
-
-    //     if (this.data.rec_result[this.data.current_batch.key].length > this.data.page_ex*30){
-    //         this.setData({
-    //             'page_ex':this.data.page_ex+1,
-    //             'page_post':this.data.page_post+1,
-    //         })
-    //         let batch_tmp_1 =  this.data.rec_result[this.data.current_batch.key].slice(this.data.page_ex*30,this.data.page_post*30)
-    //         this.setData({
-    //             'rec_result.current_batch_school': this.data.rec_result.current_batch_school_ex.concat(batch_tmp_1),
-    //             'rec_result.current_batch_school_ex': batch_tmp_1,
-    //         })
-    //     }
-
-    // },
+        console.log('to low')
+        this.setData({
+            ['rec_result.current_batch_school[' + current_page + ']']: this.data.rec_result[this.data.current_batch.key].slice(index_0, index_1),
+            'rec_result.current_page': current_page
+        })
 
 
+    },
 
 
     showModal(e) {
@@ -189,8 +160,11 @@ Page({
 
     batchChange: function (e) {
         console.log(e)
+        let current_batch = this.data.batch[parseInt(e.detail.value)]
         this.setData({
-            'current_batch': this.data.batch[parseInt(e.detail.value)]
+            'current_batch': current_batch,
+            'rec_result.current_page': 0,
+            ['rec_result.current_batch_school[' + 0 + ']']: this.data.rec_result[current_batch.key].slice(0, 30),
         })
     },
     hideModal(e) {
@@ -200,12 +174,14 @@ Page({
     },
 
     get_major_list(e) {
-        let index = parseInt(e.currentTarget.id)
-
-        this.data.rec_result.current_batch_school[index].major_hidden = !this.data.rec_result.current_batch_school[index].major_hidden
-
+        console.log('正在请求专业')
+        console.log(this.data.rec_result.current_batch_school[page_num])
+        let page_num = parseInt(e.currentTarget.id.split('_')[0])
+        let index = parseInt(e.currentTarget.id.split('_')[1])
+        // this.data.rec_result.current_batch_school[index].major_hidden = !this.data.rec_result.current_batch_school[index].major_hidden
         this.setData({
-            'rec_result': this.data.rec_result
+            ['rec_result.current_batch_school[' + page_num + ']['+index+'].major_hidden']:!this.data.rec_result.current_batch_school[page_num][index].major_hidden
+            // 'rec_result': this.data.rec_result
         })
     }
 

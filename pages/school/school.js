@@ -17,7 +17,7 @@ Page({
         TabCur: 'sch_0',
         MainCur: '全部院校',
         VerticalNavTop: 0,
-        currentTab:0,
+        currentTab: 0,
         sch_list: {
             catagory: ['全部院校', '985', '211', '双一流', '研究生点', '公立大学', '民办高校', '本科第一批', '本科第二批', '高职专科批', '一线城市', '新一线城市',
                 '北京', '上海', '天津', '重庆', '广东', '河北', '辽宁', '吉林', '黑龙江', '山东', '江苏', '浙江', '安徽', '福建', '江西', '广西', '海南', '河南', '湖南', '湖北', '山西', '内蒙古', '宁夏', '青海', '陕西', '甘肃', '新疆', '四川', '贵州', '云南', '西藏', '香港', '澳门', '台湾'],
@@ -30,7 +30,7 @@ Page({
                 content: []
             }
         },
-        load:true
+        load: true
     },
 
 
@@ -117,6 +117,61 @@ Page({
     },
 
 
+    get_score: function (e) {
+        this.setData({
+            'search_sch_name': e.detail.value
+        })
+    },
+
+    get_search_score: function (e) {
+        console.log('正在搜索学校')
+        console.log('学校名称为：', this.data.search_sch_name)
+
+        wx.request({
+            url: app.globalData.localhost_url + '/gaokao/searchlist',
+            method: 'POST',
+            data: {
+                'sch_name': this.data.search_sch_name,
+            },
+            header: {
+                'content-type': 'application/x-www-form-urlencoded',
+            },
+            success: res => {
+                let that = this
+                let result_sch = {}
+                result_sch['content'] = []
+
+                if (res.statusCode == 200) {
+                    console.log(res.data)
+                    if (res.data.length > 0) {
+                        res.data.forEach(function (value) {
+                            let value_field = value.fields
+                            value_field['sch_id'] = value['pk']
+                            value_field['sch_tags_1'] = tag_traitor(value_field['sch_tags'])[0]
+                            value_field['sch_tags_2'] = tag_traitor(value_field['sch_tags'])[1]
+                            result_sch['content'] = result_sch['content'] .concat(value_field)
+                        });
+                        wx.pageScrollTo({
+                            scrollTop: 0
+                        })
+                        that.setData({
+                            topNum: that.data.topNum = 0,
+                            MainCur: that.data.sch_list.catagory[0],
+                            currentTab: '0',
+                            'currentSch': result_sch,
+                            searchresult:true
+                        });
+                    }
+
+
+                }
+
+            },
+        })
+
+
+    },
+
 
 
     tabSelect(e) {
@@ -124,11 +179,12 @@ Page({
             scrollTop: 0
         })
         this.setData({
-            topNum: this.data.topNum = 0
+            topNum: this.data.topNum = 0,
+            searchresult:false
         });
         this.data.toView = false
         this.setData({
-            currentTab:e.currentTarget.dataset.id,
+            currentTab: e.currentTarget.dataset.id,
             TabCur: 'sch_' + e.currentTarget.dataset.id,
             MainCur: this.data.sch_list.catagory[parseInt(e.currentTarget.dataset.id)],
             toView: 'main_text'
@@ -194,11 +250,10 @@ Page({
         let tabcur = this.data.TabCur
 
         let that = this
-        if (that.data.sch_list[tabcur].page_num_ex * 30 >= that.data.sch_list[tabcur].total) {
+        if ((that.data.sch_list[tabcur].page_num_ex * 30 >= that.data.sch_list[tabcur].total) | (that.data.searchresult)) {
             this.setData({
                 isHideLoad: true
             })
-            wx.showLoading({ title: '无更多大学', icon: 'loading', duration: 1 });
         }
         else {
             wx.request({
