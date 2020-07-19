@@ -112,7 +112,6 @@ Page({
                         'rec_result.batch_2': result_batch_2,
                         'rec_result.batch_3': result_batch_3,
                         'current_batch':current_batch
-
                     })
 
                     that.setData({
