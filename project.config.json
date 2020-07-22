@@ -27,7 +27,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -67,8 +67,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/recommend",
-					"pathName": "pages/recommend/recommend",
+					"name": "pages/major",
+					"pathName": "pages/major/major",
 					"query": "",
 					"scene": null
 				},

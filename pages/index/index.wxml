@@ -5,7 +5,7 @@
     <button bind:tap="handlePushAbout">获取所有大学</button>
     
 </view> -->
-<cu-custom bgColor="bg-gradual-pink" isBack="False">
+<cu-custom bgColor="bg-gradual-pink">
     <view slot="content">雷锋帮帮我</view>
 </cu-custom>
 <view class="cu-bar bg-white solid-bottom">

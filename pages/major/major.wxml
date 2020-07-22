@@ -1,0 +1,44 @@
+<cu-custom bgColor="bg-gradual-pink" style="margin-bottom:0rpx" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">专业列表</view>
+</cu-custom>
+<scroll-view scroll-x class="bg-white nav" style="margin-bottom:5rpx">
+    <view class="flex text-center">
+        <view class="cu-item flex-sub {{currentCur=='info'?'text-green cur':''}}" bindtap="tabSelect" id="info">
+            本科专业
+        </view>
+        <view class="cu-item flex-sub {{currentCur=='score'?'text-green cur':''}}" bindtap="tabSelect" id="score">
+            专科专业
+        </view>
+    </view>
+</scroll-view>
+<view class="bg-white" wx:for="{{4}}" wx:key="{{index}}" wx:for-item="major">
+    <view class="cu-list menu">
+        <view class="cu-item">
+            <view class="content">
+                <text class="cuIcon-unfold"></text>
+                <text class="text">医学</text>
+            </view>
+        </view>
+        <view class="cu-list menu border" wx:for="{{4}}" wx:key="{{index}}" wx:for-item="major_c" style="margin-bottom:0;margin-top:0">
+            <view class="cu-item">
+                <view class="content" style="margin-left:30rpx">
+                    <text class="cuIcon-unfold"></text>
+                    <text class="text">临床医学类</text>
+                </view>
+            </view>
+            <view class="cu-item" wx:for="{{4}}" wx:key="{{index}}" wx:for-item="major_m">
+                <view class="content" style="margin-left:100rpx">
+                    <text class="text">临床医学</text>
+                </view>
+                <view class="action">
+                    <text class="cuIcon-right"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- <button class="cu-btn lines-gray round" catch:tap="get_major_list" id="{{arr_index}}_{{index}}">
+    专业 {{item.major.length}}
+    <text class="cuIcon-{{item.major_hidden?'unfold':'fold'}}"></text>
+</button> -->
