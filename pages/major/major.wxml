@@ -12,30 +12,32 @@
         </view>
     </view>
 </scroll-view>
-<view class="bg-white" wx:for="{{4}}" wx:key="{{index}}" wx:for-item="major">
-    <view class="cu-list menu">
-        <view class="cu-item">
+<view class="bg-white">
+    <view class="cu-list menu" wx:for="{{major_list}}" wx:key="index_s" wx:for-index="index_s" wx:for-item="major_s">
+        <view class="cu-item" bind:tap="showMoreMajor" id="{{index_s}}_-1">
             <view class="content">
-                <text class="cuIcon-unfold"></text>
-                <text class="text">医学</text>
+                <text class="cuIcon-{{major_s.hidden?'fold':'unfold'}}"></text>
+                <text class="text">{{major_s.name}}</text>
             </view>
         </view>
-        <view class="cu-list menu border" wx:for="{{4}}" wx:key="{{index}}" wx:for-item="major_c" style="margin-bottom:0;margin-top:0">
-            <view class="cu-item">
+        <block wx:if="{{major_s.hidden}}" wx:for="{{major_s.major_2}}" wx:key="index_c" wx:for-index="index_c" wx:for-item="major_c">
+            <view class="cu-item" bind:tap="showMoreMajor" id="{{index_s}}_{{index_c}}">
                 <view class="content" style="margin-left:30rpx">
-                    <text class="cuIcon-unfold"></text>
-                    <text class="text">临床医学类</text>
+                    <text class="cuIcon-{{major_c.hidden?'fold':'unfold'}}"></text>
+                    <text class="text">{{major_c.name}}</text>
                 </view>
             </view>
-            <view class="cu-item" wx:for="{{4}}" wx:key="{{index}}" wx:for-item="major_m">
-                <view class="content" style="margin-left:100rpx">
-                    <text class="text">临床医学</text>
+            <block wx:if="{{major_c.hidden}}" wx:for="{{major_c.major_3}}" wx:key="index_m" wx:for-item="major_m" wx:for-index="{{index_m}}">
+                <view class="cu-item" hidden="{{major_c.hidden}}">
+                    <view class="content" style="margin-left:100rpx">
+                        <text class="text">{{major_m.name}}</text>
+                    </view>
+                    <view class="action">
+                        <text class="cuIcon-right"></text>
+                    </view>
                 </view>
-                <view class="action">
-                    <text class="cuIcon-right"></text>
-                </view>
-            </view>
-        </view>
+            </block>
+        </block>
     </view>
 </view>
 <!-- <button class="cu-btn lines-gray round" catch:tap="get_major_list" id="{{arr_index}}_{{index}}">
