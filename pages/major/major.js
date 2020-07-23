@@ -2,7 +2,7 @@ const app = getApp()
 Page({
     data: {
         haha:false,
-        major_list: [
+        major_list_demo: [
             {
                 code: '01',
                 name: '哲学',
@@ -115,7 +115,7 @@ Page({
             console.log(result_1)
             result_1.hidden = !result_1.hidden
             this.setData({
-                ['major_list[' + index_s + '].hidden']: true
+                ['major_list[' + index_s + ']']: result_1
             })
         }
         
@@ -126,6 +126,39 @@ Page({
                 ['major_list[' + index_s + '].major_2[' + index_c + ']']: result_1
             })
         }
+    },
+
+    onLoad: function (options) {
+
+        let that = this
+        let result = []
+
+        wx.getSystemInfo({
+            success: function (res) {
+                that.setData({
+                    scrollHeight: res.windowHeight
+                });
+            }
+        });
+        wx.request({
+            url: app.globalData.localhost_url + '/gaokao/majorlist',
+            method: 'POST',
+            data: {
+
+            },
+            header: {
+                'content-type': 'application/x-www-form-urlencoded',
+            },
+            success: res => {
+                if (res.statusCode == 200) { //服务端处理正常，登录成功
+                    console.log(res.data)
+                    result = res.data
+                    that.setData({
+                        'major_list':res.data
+                    })
+                }
+            },
+        });
     },
 
 
