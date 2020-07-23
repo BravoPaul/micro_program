@@ -73,11 +73,21 @@ Page({
         console.log(this.data.recommend.wenli_current)
     },
 
-    get_all_school() {
-        wx.navigateTo({
-            url: '/pages/school/school',
-        })
+    get_func: function (e) {
+        console.log(e)
+
+        if (e.currentTarget.id === "0") {
+            wx.navigateTo({
+                url: '/pages/school/school',
+            })
+        }
+        else if (e.currentTarget.id === "1") {
+            wx.navigateTo({
+                url: '/pages/major/major',
+            })
+        }
     },
+
 
     get_score: function (e) {
         this.setData({
@@ -92,7 +102,7 @@ Page({
         let wenli = JSON.stringify(this.data.recommend.wenli_current.split('_')[1])
         let score = JSON.stringify(this.data.recommend.score)
         wx.navigateTo({
-            url: '/pages/recommend/recommend?province_id=' + province_id + '&wenli=' + wenli + '&score=' + score+'&province=' + province,
+            url: '/pages/recommend/recommend?province_id=' + province_id + '&wenli=' + wenli + '&score=' + score + '&province=' + province,
         })
     }
 })
