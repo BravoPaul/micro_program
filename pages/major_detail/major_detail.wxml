@@ -1,0 +1,58 @@
+<cu-custom bgColor="bg-gradual-pink" style="margin-bottom:0rpx" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">专业详情</view>
+</cu-custom>
+<view class="cu-card case no-card bg-white padding radius text-center light">
+    <view class="cu-item shadow-warp">
+        <view class="cu-item">
+            <view class="content flex-sub">
+                <view class="margin">
+                    <text class="text-xxl text-bold">{{major_detail.intro}}</text>
+                </view>
+                <!-- <view class="text-sm margin flex">
+                    <view class="cu-tag" wx:for="{{sch_info.sch_meta.sch_tags_1}}">{{item}}</view>
+                </view> -->
+            </view>
+        </view>
+    </view>
+</view>
+<view class="info_container" hidden="{{info_container_hidden}}">
+    <view class="cu-card case no-card bg-white padding">
+        <view class="solids-bottom padding-xs flex ">
+            <view class="flex-sub">
+                <view class="cu-bar bg-white">
+                    <view class="action">
+                        <text class="cuIcon-titles text-green"></text>
+                        <text class="text-xl text-bold">专业介绍</text>
+                    </view>
+                    <text class="cuIcon-{{sch_info.sch_intro.useFullNow?'fold':'unfold'}} text-green" id="sch_intro" bind:tap="toggle">
+                        {{sch_info.sch_intro.useFullNow?'收起':'展开'}}
+                    </text>
+                </view>
+                <view class="padding">
+                    <text class="text-l">
+                        {{sch_info.sch_intro.useFullNow?sch_info.sch_intro.content_full:sch_info.sch_intro.content_simple}}
+                    </text>
+                </view>
+            </view>
+        </view>
+        <view class="solids-bottom padding-xs flex ">
+            <view class="flex-sub">
+                <view class="cu-bar bg-white">
+                    <view class="action">
+                        <text class="cuIcon-titles text-green"></text>
+                        <text class="text-xl text-bold">奖学金介绍</text>
+                    </view>
+                    <text class="cuIcon-{{sch_info.sch_scholarship.useFullNow?'fold':'unfold'}} text-green" id="sch_scholarship" bind:tap="toggle">
+                        {{sch_info.sch_scholarship.useFullNow?'收起':'展开'}}
+                    </text>
+                </view>
+                <view class="padding">
+                    <text class="text-l">
+                        {{sch_info.sch_scholarship.useFullNow?sch_info.sch_scholarship.content_full:sch_info.sch_scholarship.content_simple}}
+                    </text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
